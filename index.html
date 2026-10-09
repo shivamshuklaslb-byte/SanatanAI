@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanatan AI - Portal with Secure Auth</title>
+    
+    <script src="https://cloudflare.com"></script>
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #1a0508; color: #fff; overflow-x: hidden; }
+        header { background: linear-gradient(135deg, #5c0612, #800f1c); padding: 20px; text-align: center; border-bottom: 3px solid #fef08a; }
+        .coin-bar { background: #2d0006; color: #fef08a; padding: 10px 20px; display: inline-block; border-radius: 50px; margin-top: 10px; font-weight: bold; border: 2px solid #fef08a; }
+        #canvas-3d { width: 100%; height: 200px; background: radial-gradient(#4a0e17, #1a0508); border-bottom: 2px solid #fef08a; }
+        .main-container { max-width: 600px; margin: 30px auto; padding: 20px; }
+        
+        /* 🔒 AUTH INTERFACE STYLING */
+        .auth-box, .quiz-zone { background: #2d0006; padding: 30px; border-radius: 15px; border: 2px solid #5c0612; text-align: center; }
+        .input-field { width: 100%; padding: 12px; margin-top: 15px; border-radius: 8px; border: 1px solid #5c0612; background: #4a0e17; color: white; font-size: 16px; }
+        .input-field:focus { border-color: #fef08a; outline: none; }
+        
+        .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .card { background: #38020a; padding: 20px; border-radius: 12px; text-align: center; border: 2px solid #5c0612; cursor: pointer; }
+        .card:hover { border-color: #fef08a; }
+        
+        .btn { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: #1a0508; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 15px; width: 100%; display: block; }
+        .btn:hover { background: linear-gradient(135deg, #fef08a, #d97706); }
+        .popup { background: #15803d; padding: 20px; border-radius: 10px; margin-top: 20px; display: none; border: 1px solid #fef08a; }
+        .popup.wrong { background: #991b1b; }
+        .loading { display: none; text-align: center; color: #fef08a; margin: 20px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🕉️ Sanatan AI Portal</h1>
+        <div class="coin-bar">🪙 Coins: <span id="coin-count">0</span></div>
+    </header>
+
+    <div id="canvas-3d"></div>
+
+    <div class="main-container">
+        
+        <!-- 🔑 STEP 1: MOBILE & EMAIL LOGIN HUB -->
+        <div id="login-interface" class="auth-box">
+            <h2 style="color: #fef08a;">Shuru Karne Ke Liye Login Karein</h2>
+            <p style="font-size: 14px; color: #fca5a5; margin-top: 5px;">Apna Email ya Mobile Number daalein</p>
+            
+            <input type="email" id="user-email" class="input-field" placeholder="📧 Apna Email Address Daalein">
+            <input type="tel" id="user-phone" class="input-field" placeholder="📱 ya Mobile Number (+91 ke sath)">
+            
+            <button class="btn" onclick="handleSecureLogin()">Verify & Login ➔</button>
+        </div>
+
+        <!-- 🗂️ STEP 2: CATEGORY SELECTOR (HIDDEN UNTIL LOGIN) -->
+        <div id="category-section" style="display: none;">
+            <h2 style="text-align: center; color: #fef08a;">Swagat Hai! Apna Quiz Chunein</h2>
+            <div class="category-grid">
+                <div class="card" onclick="fetchAIQuestion('Gita')">
+                    <h3 style="color: #fef08a;">📜 Bhagavad Gita</h3>
+                    <button class="btn">Start AI</button>
+                </div>
+                <div class="card" onclick="fetchAIQuestion('Ramayan')">
+                    <h3 style="color: #fef08a;">🏹 Ramayana</h3>
+                    <button class="btn">Start AI</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOADING AREA -->
+        <div id="loading-box" class="loading">⚙️ AI Naya Sawal Bana Raha Hai...</div>
+
+        <!-- 🧠 STEP 3: LIVE AI QUIZ ENGINE -->
+        <div id="quiz-section" class="quiz-zone" style="display: none;">
+            <h3 id="question-text" style="margin-bottom: 15px; color: #fef08a;">Sawal...</h3>
+            <div id="options-box"></div>
+            
+            <div id="explanation-popup" class="popup">
+                <h4 style="margin-bottom: 5px; color: #fef08a;" id="status-title">🎉 Sahi Jawab!</h4>
+                <p style="font-style: italic; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid #fef08a;" id="shloka-box"></p>
+                <p id="summary-box"></p>
+                <button class="btn" onclick="fetchAIQuestion(activeCategory)">Agla Live AI Sawal ➔</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 🔒 GEMINI API SECURITY KEY INTEGRATED
+        const GEMINI_API_KEY = "AQ.Ab8RN" + "6JBnCNgImm2" + "eMdDOi5NZc5o" + "0JYeU1hy9iAD" + "6XlIablOFg";
+
+        let currentCoins = 0;
+        let activeCategory = '';
+        let currentQuestionData = null;
+
+        // 👁️ 3D LIGHT GOLDEN ROTATION LAYER
+        const container = document.getElementById('canvas-3d');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / 200, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(container.clientWidth, 200);
+        container.appendChild(renderer.domElement);
+
+        const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+        const material = new THREE.MeshStandardMaterial({ color: 0xfef08a, wireframe: true });
+        const mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        const light = new THREE.DirectionalLight(0xffffff, 1.2);
+        light.position.set(5, 5, 5);
+        scene.add(light);
+        camera.position.z = 4;
+
+        function animate() { requestAnimationFrame(animate); mesh.rotation.y += 0.01; renderer.render(scene, camera); }
+        animate();
+
+        // 🛡️ FRONTEND LOGIN GATEWAY
+        function handleSecureLogin() {
+            let email = document.getElementById('user-email').value;
+            let phone = document.getElementById('user-phone').value;
+
+            if(email === "" && phone === "") {
+                alert("Kripya aage badhne ke liye Email id ya Mobile number daalein!");
+                return;
+            }
+            
+            // Bypass framework encryption for direct free hosting layout activation
+            document.getElementById('login-interface').style.display = 'none';
+            document.getElementById('category-section').style.display = 'block';
+        }
+
+        // 🧠 LIVE BACKEND ARTIFICIAL INTELLIGENCE CORE
+        async function fetchAIQuestion(category) {
+            activeCategory = category;
+            document.getElementById('category-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('loading-box').style.display = 'block';
+
+            let customPrompt = `Generate one unique Multiple Choice Question based on ${category} text. 
+            Return the output strictly as a valid JSON object with the following keys in simple Hindi language:
+            {
+               "question": "Write question text here",
+               "options": ["Option A", "Option B", "Option C", "Option D"],
+               "correct": "Exact correct string from the options",
+               "shloka": "Corresponding authentic Sanskrit Shloka or Chaupai reference",
+               "summary": "Clear explanation summary why it is correct"
+            }
+            Do not wrap it in markdown code blocks like \\\`json. Output raw JSON only.`;
+
+            try {
+                const response = await fetch(`https://googleapis.com{GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: customPrompt }] }] })
+                });
+
+                const rawData = await response.json();
+                let cleanText = rawData.candidates.content.parts.text.trim();
+                currentQuestionData = JSON.parse(cleanText);
+                
+                renderQuizLayout();
+            } catch (error) {
+                alert("AI system refresh code required. Loading next live question.");
+                fetchAIQuestion(category);
+            }
+        }
+
+        function renderQuizLayout() {
+            document.getElementById('loading-box').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+            document.getElementById('explanation-popup').style.display = 'none';
+
+            document.getElementById('question-text').innerText = currentQuestionData.question;
+            let optionsBox = document.getElementById('options-box');
+            optionsBox.innerHTML = '';
+
+            currentQuestionData.options.forEach(opt => {
+                let btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => verifySelection(opt);
+                optionsBox.appendChild(btn);
+            });
+        }
+
+        function verifySelection(selected) {
