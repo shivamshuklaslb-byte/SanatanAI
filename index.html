@@ -1,82 +1,325 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sanatan AI — सनातन ज्ञान की डिजिटल यात्रा</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sanatan AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&family=Playfair+Display:wght@700;800&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
-:root{--gold:#ffc85e;--gold2:#ffe7a3;--ink:#071225;--panel:#0b1b31;--panel2:#102642;--muted:#c0cadd;--line:#eec66b4a;--green:#72e7a8;--red:#ff8c8c}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#fff7e7;background:#06101f;font-family:Inter,"Noto Sans Devanagari",Segoe UI,Arial,sans-serif;overflow-x:hidden}button,input,textarea,select{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}.bgfx{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 10% 15%,#254d6a 0,transparent 35%),radial-gradient(ellipse at 88% 30%,#523016 0,transparent 30%),linear-gradient(145deg,#06101f,#10223b 50%,#050b16)}.bgfx:after{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff9 1px,transparent 1px);background-size:54px 54px;opacity:.11}.wrap{width:min(1180px,92%);margin:auto}.nav{position:sticky;top:0;z-index:50;background:#06101fe8;backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.navin{height:72px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.2rem}.brandmark{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:#291500;font-size:25px;background:radial-gradient(circle at 30% 25%,#fff2bb,#f6a51f 65%,#8b3f08);box-shadow:0 0 25px #ffc65e66}.brand small{display:block;font-size:.65rem;color:#d3b778;letter-spacing:.7px;font-weight:500}.navlinks{display:flex;gap:18px;align-items:center;color:#d4dced;font-size:.9rem}.navlinks a:hover{color:var(--gold)}.navright{display:flex;gap:9px;align-items:center}.coinpill{border:1px solid var(--line);background:#ffc85e13;border-radius:99px;padding:9px 12px;color:var(--gold);font-weight:800}.btn{border:0;border-radius:12px;padding:12px 17px;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.07)}.goldbtn{background:linear-gradient(135deg,#ffe6a0,#ffb52f 65%,#ef841b);color:#251504;box-shadow:0 7px 24px #ffb12e2e}.glassbtn{background:#ffffff0b;color:#fff2d4;border:1px solid #ffffff26}.tiny{font-size:.82rem;color:var(--muted);line-height:1.65}.hero{min-height:610px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:28px;padding:64px 0 55px}.eyebrow{display:inline-flex;gap:9px;align-items:center;padding:8px 13px;border:1px solid var(--line);border-radius:99px;background:#071225a8;color:#ffdfa0;font-size:.83rem}.dot{height:8px;width:8px;background:#72e7a8;border-radius:50%;box-shadow:0 0 13px #72e7a8}.hero h1{font-size:clamp(3.1rem,7vw,6.2rem);line-height:.96;letter-spacing:-2.8px;margin:23px 0 15px;text-shadow:0 5px 35px #0008}.goldtext{background:linear-gradient(90deg,#fff1bf,#ffbf43,#ffdf8b);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:#d0d8e7;line-height:1.8;font-size:1.08rem;max-width:620px}.actions{display:flex;gap:11px;flex-wrap:wrap;margin:24px 0}.heroart{height:460px;position:relative;display:grid;place-items:center;perspective:900px}.templehalo{position:absolute;width:360px;height:360px;border-radius:50%;border:1px solid #ffce6b66;box-shadow:0 0 75px #ffb32a22,inset 0 0 60px #ffb32a12;transform:rotateX(67deg) rotateZ(-20deg)}.templehalo.h2{width:430px;height:430px;border-color:#a6d5ff44;transform:rotateX(67deg) rotateZ(35deg)}.shrine{position:relative;width:260px;height:295px;display:grid;place-items:center;transform:rotateY(-10deg);filter:drop-shadow(0 25px 35px #0009);animation:float 5.5s ease-in-out infinite}.shrine .sun{position:absolute;width:215px;height:215px;border-radius:50%;background:radial-gradient(circle,#fff5c5 0,#ffbd3b 10%,#f57b1e55 38%,transparent 70%);filter:blur(1px)}.shrine .om{position:relative;font-size:116px;color:#ffeab0;text-shadow:0 0 18px #ffbd42,0 0 55px #ff8a18;z-index:2}.base{position:absolute;bottom:18px;width:235px;height:48px;background:linear-gradient(#ffdc8a,#9a5015 45%,#291a13);clip-path:polygon(15% 0,85% 0,100% 100%,0 100%);border:1px solid #ffdf9b}.pillar{position:absolute;bottom:60px;width:170px;height:75px;border:2px solid #e4a84a;border-bottom:0;background:linear-gradient(90deg,#432615,#b9782c,#412514);clip-path:polygon(0 0,100% 0,86% 100%,14% 100%)}.floatbox{position:absolute;border:1px solid #ffdb8c45;background:#09172ad9;backdrop-filter:blur(12px);border-radius:15px;padding:13px 15px;box-shadow:0 14px 40px #0005}.floatbox b{display:block;color:var(--gold);margin-bottom:4px}.f1{top:30px;right:0}.f2{left:0;bottom:48px}.f3{right:0;bottom:65px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:5px auto 55px}.metric,.card{border:1px solid #ffffff1a;background:linear-gradient(145deg,#122642d9,#071426e8);border-radius:19px;box-shadow:0 14px 38px #0002}.metric{padding:19px}.metric b{display:block;font-size:1.55rem;color:var(--gold);margin-bottom:5px}.metric span{color:var(--muted);font-size:.85rem}.section{padding:55px 0}.secthead{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:25px}.kicker{color:var(--gold);font-size:.76rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}.secthead h2{font-size:clamp(1.9rem,4vw,2.8rem);margin:0 0 9px}.secthead p{margin:0;color:var(--muted);line-height:1.7;max-width:700px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:21px;overflow:hidden;position:relative}.card h3{margin:0 0 9px}.card p{color:var(--muted);line-height:1.7;margin:0 0 13px}.bookicon{height:105px;border-radius:14px;margin-bottom:16px;display:grid;place-items:center;font-size:49px;background:radial-gradient(circle at 50% 35%,#ffce5a55,#091426 70%);border:1px solid #ffcf6b38}.linkbtn{border:0;background:none;padding:0;color:var(--gold);font-weight:800}.featuregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.feature .n{color:var(--gold);font-size:.8rem;letter-spacing:1.5px}.feature .symbol{font-size:26px;margin:10px 0}.pagesummary{display:grid;grid-template-columns:1fr 1fr;gap:17px}.wide{padding:25px}.statrow{display:flex;gap:20px;flex-wrap:wrap;margin-top:18px}.statrow b{color:var(--gold);font-size:1.4rem;display:block}.quote{border-left:3px solid var(--gold);padding:12px 15px;background:#ffc85e0d;color:#ffe7b0;border-radius:0 12px 12px 0;line-height:1.7;margin-top:12px}.authzone{display:grid;grid-template-columns:.8fr 1.2fr;gap:20px;align-items:stretch}.authart{min-height:390px;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 50% 40%,#bd751d66,transparent 38%),linear-gradient(150deg,#0b1b31,#251b1b);border:1px solid var(--line);border-radius:22px;padding:25px}.authart .bigom{font-size:100px;color:var(--gold);text-shadow:0 0 45px #ffb72c}.authcard{padding:26px}.tabs{display:flex;background:#050e1c;border:1px solid #ffffff16;border-radius:12px;padding:4px;margin:15px 0}.tabs button{flex:1;background:transparent;border:0;color:var(--muted);padding:10px;border-radius:9px}.tabs button.active{background:linear-gradient(120deg,#ffdc88,#f6a52d);color:#251504;font-weight:900}.field{display:block;margin:12px 0;color:#d8dfeb;font-size:.88rem}.field input,.field select,.field textarea{width:100%;margin-top:7px;padding:13px;border-radius:10px;border:1px solid #ffffff24;background:#061121;color:#fff7e7;outline:none}.field input:focus,.field textarea:focus{border-color:#ffca5e}.authcard .btn{width:100%;margin-top:8px}.quizwrap{display:grid;grid-template-columns:1.2fr .8fr;gap:17px;align-items:start}.quizcard{padding:24px}.quizmeta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:.86rem}.badge{border:1px solid var(--line);border-radius:99px;color:var(--gold);padding:6px 10px}.progress{height:6px;background:#ffffff13;border-radius:99px;overflow:hidden;margin:17px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#f79323,#ffe09a);transition:width .25s}.qtext{font-size:1.35rem;line-height:1.55;margin:20px 0}.options{display:grid;gap:10px}.option{border:1px solid #ffffff20;border-radius:12px;background:#ffffff07;color:#fff5df;text-align:left;padding:14px;cursor:pointer}.option:hover:not(:disabled){border-color:#ffcc64;background:#ffcc6410}.option.good{border-color:var(--green);background:#72e7a817}.option.bad{border-color:var(--red);background:#ff8c8c17}.feedback{display:none;margin-top:15px;border:1px solid #ffffff1d;background:#ffffff08;border-radius:14px;padding:15px;line-height:1.75}.feedback.show{display:block}.feedback h4{margin:0 0 7px;color:var(--green)}.verse{border-left:3px solid var(--gold);padding:11px;margin-top:10px;background:#ffc85e0b;color:#ffe6ad}.mode{display:flex;justify-content:space-between;align-items:center;border:1px solid #ffffff1c;padding:13px;border-radius:12px;margin-top:9px}.mode small{display:block;color:var(--muted);margin-top:4px}.mode.locked{opacity:.5}.leader{width:100%;border-collapse:collapse}.leader td,.leader th{padding:13px 8px;text-align:left;border-bottom:1px solid #ffffff15}.leader th{font-size:.8rem;color:var(--muted)}.rank{color:var(--gold);font-weight:900}.reviewlayout{display:grid;grid-template-columns:.85fr 1.15fr;gap:17px}.stars{display:flex;gap:7px;font-size:28px;color:#55617a}.stars span{cursor:pointer}.stars .on{color:var(--gold)}.reviews{display:grid;gap:10px}.review{border:1px solid #ffffff1b;border-radius:13px;padding:14px;background:#ffffff05}.review b{color:var(--gold)}.review p{color:var(--muted);line-height:1.6;margin:7px 0 0}.giftbox{display:flex;align-items:center;justify-content:space-between;gap:18px;background:linear-gradient(100deg,#c87b211e,#071426);border:1px solid var(--line);border-radius:20px;padding:23px}.gifticon{font-size:3rem}.footer{border-top:1px solid #ffffff18;padding:27px 0 40px;color:var(--muted);font-size:.86rem}.footin{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.hidden{display:none!important}.toast{position:fixed;bottom:18px;right:18px;z-index:100;background:#102642;border:1px solid var(--line);padding:15px 18px;border-radius:13px;box-shadow:0 10px 40px #0009;max-width:340px;display:none}.toast.show{display:block}.userpill{color:#ffdfa0;font-size:.85rem}.mobilemenu{display:none}
-@keyframes float{0%,100%{transform:translateY(0) rotateY(-10deg)}50%{transform:translateY(-12px) rotateY(2deg)}}
-@media(max-width:900px){.navlinks{display:none}.mobilemenu{display:block}.hero{grid-template-columns:1fr;padding-top:45px}.heroart{height:390px}.metrics{grid-template-columns:repeat(2,1fr)}.grid3,.featuregrid{grid-template-columns:repeat(2,1fr)}.authzone,.quizwrap,.reviewlayout,.pagesummary{grid-template-columns:1fr}}
-@media(max-width:570px){.brand{font-size:1rem}.brandmark{width:36px;height:36px}.coinpill{font-size:.82rem;padding:8px}.navin{height:64px}.hero h1{letter-spacing:-1.5px}.grid3,.featuregrid{grid-template-columns:1fr}.metric{padding:14px}.metric b{font-size:1.3rem}.secthead{align-items:start;flex-direction:column}.heroart{height:330px}.shrine{transform:scale(.83)}.templehalo{width:270px;height:270px}.templehalo.h2{width:320px;height:320px}.f1{right:-4px}.f2{left:-4px}.f3{right:-4px}.quizcard,.authcard{padding:18px}}
+:root{--bg:#0B0817;--tx:#F6EFE2;--mut:#B9AEC9;--card:rgba(255,255,255,.06);--line:rgba(231,190,110,.32);--ac:#FF9933;--ac2:#B58CFF;--hd:#FFE29A;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#FBF3E2;--tx:#241638;--mut:#5C5070;--card:rgba(255,255,255,.7);--line:rgba(160,110,30,.35);--ac:#D9650A;--ac2:#6A2FD0;--hd:#8A4A06}}
+:root[data-theme="dark"]{--bg:#0B0817;--tx:#F6EFE2;--mut:#B9AEC9;--card:rgba(255,255,255,.06);--line:rgba(231,190,110,.32);--ac:#FF9933;--ac2:#B58CFF;--hd:#FFE29A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;color:var(--tx);font-family:'Outfit',sans-serif;line-height:1.6;background:var(--bg) radial-gradient(circle at 8% 10%,rgba(255,153,51,.22),transparent 40%),radial-gradient(circle at 90% 20%,rgba(106,47,208,.35),transparent 45%),radial-gradient(circle at 30% 90%,rgba(47,209,170,.14),transparent 45%);background-attachment:fixed;min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.sa{font-family:'Tiro Devanagari Hindi',serif}.hd{font-family:'Playfair Display',Georgia,serif}
+#nav,main,footer{position:relative;z-index:1}
+#nav{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;max-width:1100px;margin:12px auto 0;padding:10px 18px;border:1px solid var(--line);border-radius:22px;background:var(--card);backdrop-filter:blur(14px);position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:5}
+.brand{display:flex;gap:10px;align-items:center;color:var(--tx);text-decoration:none;cursor:pointer}.brand b{font-family:'Playfair Display',serif;font-size:20px;color:var(--hd);display:block;line-height:1.1}.brand small{font-size:10px;letter-spacing:.2em;color:var(--mut)}
+.om{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-size:24px;color:#2a1200;background:linear-gradient(135deg,#FFE29A,#FF8A1F)}
+#nav nav{display:flex;gap:4px;flex-wrap:wrap}#nav nav a{cursor:pointer;padding:8px 14px;border-radius:999px;color:var(--mut);font-weight:500;min-height:40px;display:inline-flex;align-items:center}#nav nav a.on,#nav nav a:hover{color:var(--tx);background:var(--card)}
+body:not(.in) .qnav,body:not(.in) #who,body:not(.in) #lo{display:none}body.in #li{display:none}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:14px 28px;font:600 16px 'Outfit',sans-serif;cursor:pointer;color:#2a1200;background:linear-gradient(135deg,#FFC24D,#FF8A1F);box-shadow:0 5px 0 #8A4A06,0 14px 26px rgba(0,0,0,.35);min-height:44px}.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #8A4A06}
+.btn.alt{background:var(--card);color:var(--tx);border:1px solid var(--line);box-shadow:none}.btn.sm{padding:9px 20px;min-height:40px}
+main{max-width:1100px;margin:0 auto;padding:30px 20px 60px;perspective:1500px}
+.pg[hidden]{display:none}.flip{animation:flip .7s cubic-bezier(.2,.8,.2,1)}
+@keyframes flip{from{opacity:0;transform:rotateY(-24deg) translateZ(-260px) translateX(-40px)}to{opacity:1;transform:none}}
+h1,h2{font-family:'Playfair Display',serif;margin:0}h2{font-size:clamp(30px,5vw,46px);color:var(--hd)}h2 b{color:var(--ac)}
+.sub{color:var(--mut);margin:6px 0 28px}
+.gl{background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:24px;padding:22px;backdrop-filter:blur(10px);transition:transform .15s,box-shadow .2s;transform-style:preserve-3d;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center;min-height:70vh}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:6px 16px;color:var(--ac);letter-spacing:.2em;margin-bottom:18px}
+.hero h1{font-size:clamp(54px,9vw,112px);line-height:1;background:linear-gradient(180deg,#FFE29A,#FFF4DC);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 8px 14px rgba(0,0,0,.45))}
+.hero p{font-size:18px;color:var(--mut);max-width:560px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.stats div{min-width:110px;text-align:center;padding:12px 18px}.stats b{font:700 30px 'Playfair Display',serif;color:var(--hd);display:block}.stats small{color:var(--mut);letter-spacing:.12em;font-size:11px;text-transform:uppercase}
+.cards3d{position:relative;height:470px;transform-style:preserve-3d;transform:rotateY(calc(var(--mx,0)*16deg)) rotateX(calc(var(--my,0)*-12deg));transition:transform .15s}
+.fc{position:absolute;width:240px;padding:18px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(60,35,110,.9),rgba(30,16,60,.9));box-shadow:0 24px 50px rgba(0,0,0,.5);animation:bob 5s ease-in-out infinite}
+.fc b{font:700 20px 'Playfair Display',serif;display:block;margin-top:10px;color:#FFF4DC}.fc small{color:#C9BBE0}
+@keyframes bob{50%{margin-top:-14px}}
+.ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:24px}
+.sc{cursor:pointer;display:flex;flex-direction:column;gap:6px}.sc .top{display:flex;justify-content:space-between;align-items:flex-start}.sc .pill{font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(0,0,0,.4);color:#FFE29A}
+.sc h3{margin:8px 0 0;font:700 22px 'Playfair Display',serif;color:#FFF4DC}.sc small{color:var(--mut)}.sc p{margin:4px 0 0;color:var(--mut);font-size:15px}
+.num{font:700 32px 'Playfair Display',serif;color:var(--ac)}
+details{border-top:1px solid var(--line);padding:12px 0}summary{cursor:pointer;font-weight:600}details p{color:var(--mut);margin:8px 0 0}
+.chips,.tabs{display:flex;gap:8px;flex-wrap:wrap}.chip,.tab{border:1px solid var(--line);background:transparent;color:var(--tx);border-radius:999px;padding:8px 16px;cursor:pointer;font:500 15px 'Outfit',sans-serif;min-height:44px}
+.chip.on,.tab.on{background:var(--ac);color:#2a1200;border-color:var(--ac)}.tab:disabled{opacity:.45;cursor:not-allowed}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0}
+.prog{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:10px 0 16px}.prog div{height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .3s}
+#q{font-size:clamp(20px,3vw,26px);margin:0 0 16px;font-weight:500}
+.opt{display:block;width:100%;text-align:left;margin:0 0 10px;padding:14px 18px;border-radius:14px;border:1.5px solid var(--line);background:rgba(255,255,255,.04);color:var(--tx);font:400 17px 'Outfit',sans-serif;cursor:pointer;min-height:44px}.opt:hover:not(:disabled){border-color:var(--ac)}
+.opt.ok{border-color:#1F9D55;background:rgba(31,157,85,.2)}.opt.no{border-color:#D63B3B;background:rgba(214,59,59,.18)}
+#ex{display:none;margin-top:16px;padding:16px;border-radius:16px;background:rgba(106,47,208,.16);border-left:4px solid var(--ac2)}#ex .sl{font-size:22px;line-height:1.7;margin:8px 0 4px}#ex small{color:var(--mut)}
+.stat b{color:var(--ac)}
+#stars{display:flex;gap:6px;margin:10px 0}.st{font-size:30px;line-height:1;background:none;border:0;cursor:pointer;color:var(--line);min-width:44px;min-height:44px}.st.on{color:#F2B21B}
+textarea,input.in{width:100%;border-radius:12px;border:1.5px solid var(--line);background:rgba(255,255,255,.05);color:var(--tx);font:400 16px 'Outfit',sans-serif;padding:12px}textarea{min-height:90px}
+.rv{border-top:1px solid var(--line);padding:12px 0}.rv:first-child{border:0}.rv b{color:#F2B21B}.rv small{color:var(--mut)}
+#lb{margin:0;padding-left:24px}#lb li{padding:8px 0;border-bottom:1px solid var(--line)}#lb li.me{color:var(--ac);font-weight:700}
+#toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translate(-50%,-160%);background:linear-gradient(135deg,#FFE29A,#FF9933);color:#1B1230;padding:14px 22px;border-radius:16px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .4s;z-index:20;max-width:92vw;text-align:center}#toast.on{transform:translate(-50%,0)}
+#lm{position:fixed;inset:0;z-index:15;background:rgba(5,3,12,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}#lm.on{display:flex}#lm .gl{max-width:420px;width:100%;background:#1a1030}
+footer{text-align:center;color:var(--mut);padding:30px 20px 60px;font-size:14px}
+@media(max-width:820px){.hero{grid-template-columns:1fr;min-height:0}.cards3d{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px;transform:none}.fc{position:static;width:auto;animation:none;transform:none!important}}
+@media(prefers-reduced-motion:reduce){.fc,.flip{animation:none}}
 </style>
 </head>
-<body><div class="bgfx"></div>
-<header class="nav"><div class="wrap navin">
-<a class="brand" href="#home"><span class="brandmark">ॐ</span><span>Sanatan AI<small>Ancient Wisdom • Modern AI</small></span></a>
-<nav class="navlinks"><a href="#home">Home</a><a href="#about">About</a><a href="#granth">Granth</a><a href="#reviews">Reviews</a><a href="#leaderboard">Leaderboard</a><a href="#auth">Login</a></nav>
-<div class="navright"><span class="coinpill hidden" id="navCoins">🪙 0</span><span class="userpill hidden" id="navUser"></span><button class="btn goldbtn" id="navAuth" onclick="document.querySelector('#auth').scrollIntoView({behavior:'smooth'})">Login / Sign up</button><button class="btn glassbtn mobilemenu" onclick="document.querySelector('#auth').scrollIntoView({behavior:'smooth'})">☰</button></div>
-</div></header>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div id="toast" role="status"></div>
+<header id="nav">
+<a class="brand" data-p="home"><span class="om sa">ॐ</span><span><b>Sanatan AI</b><small>GYAAN • SHRADDHA • SANSKRITI</small></span></a>
+<nav><a data-p="home">Home</a><a data-p="granth">Sections</a><a data-p="kyu">Kyu Sanatan AI</a><a data-p="reviews">Reviews</a><a data-p="inaam">Inaam</a><a data-p="quiz" class="qnav">Quiz</a></nav>
+<span><span id="who" class="stat" style="margin-right:8px"></span><button class="btn sm" id="li">Login</button><button class="btn sm alt" id="lo">Logout</button></span>
+</header>
+
 <main>
-<section class="wrap hero" id="home"><div>
-<span class="eyebrow"><span class="dot"></span> सनातन ज्ञान • सभी के लिए</span>
-<h1>Sanatan<br><span class="goldtext">AI</span></h1>
-<p>Explore the Eternal Wisdom of Sanatan Dharma. भगवद्गीता, रामायण, महाभारत और अन्य सनातन ग्रंथों से जुड़े प्रश्नों के माध्यम से सीखें, समझें और आगे बढ़ें।</p>
-<div class="actions"><button class="btn goldbtn" onclick="goQuiz()">✨ क्विज़ शुरू करें</button><a class="btn glassbtn" href="#about">हमारे बारे में जानें ↗</a></div>
-<div class="tiny">क्विज़ खेलने और स्कोर/कॉइन सेव करने के लिए Login आवश्यक है। यह प्रोटोटाइप है; सार्वजनिक लॉन्च से पहले सामग्री और धार्मिक संदर्भ सत्यापित करें।</div>
-</div><div class="heroart"><div class="templehalo"></div><div class="templehalo h2"></div><div class="shrine"><div class="sun"></div><div class="pillar"></div><div class="om">ॐ</div><div class="base"></div></div><div class="floatbox f1"><b>500+ प्रश्नों का लक्ष्य</b><span class="tiny">विषयवार सनातन ज्ञान</span></div><div class="floatbox f2"><b>🪙 सीखें और कमाएँ</b><span class="tiny">सही उत्तरों पर कॉइन</span></div><div class="floatbox f3"><b>🏆 मासिक सम्मान</b><span class="tiny">टॉप स्कोरर्स के लिए</span></div></div></section>
-<div class="wrap metrics"><div class="metric"><b>500+</b><span>प्रश्नों का लक्ष्य</span></div><div class="metric"><b>5+</b><span>ग्रंथ श्रेणियाँ</span></div><div class="metric"><b>3 स्तर</b><span>Normal • Hard • Challenge</span></div><div class="metric"><b>50 🪙</b><span>10 सही उत्तरों पर डेमो रिवॉर्ड</span></div></div>
-<section class="section" id="about"><div class="wrap"><div class="secthead"><div><div class="kicker">Our Purpose</div><h2>Sanatan AI क्यों बनाया गया?</h2><p>हमारा लक्ष्य सनातन साहित्य को एक सुंदर, सरल और सहभागितापूर्ण डिजिटल अनुभव के माध्यम से पढ़ने और समझने में मदद करना है।</p></div></div><div class="pagesummary"><div class="card wide"><h3>🪔 हमारा मिशन</h3><p>प्राचीन ज्ञान और आज की तकनीक के बीच एक सेतु बनाना—ताकि लोग ग्रंथों से जुड़े प्रश्नों का अभ्यास करें, उत्तर के पीछे का अर्थ समझें और मूल स्रोतों तक पहुँचने के लिए प्रेरित हों।</p><div class="quote">“सिर्फ सही जवाब नहीं—उसका संदर्भ, अर्थ और सीख भी।”</div></div><div class="card wide"><h3>✨ इसे क्यों इस्तेमाल करें?</h3><p>• विषयवार क्विज़ से अभ्यास<br>• उत्तर के नीचे सरल सारांश और संदर्भ<br>• Normal से Hard तक सीखने की यात्रा<br>• प्रगति, कॉइन और लीडरबोर्ड<br>• ग्रंथों और परंपराओं के बारे में जिज्ञासा बढ़ाना</p><div class="statrow"><div><b>ज्ञान</b><span class="tiny">समझकर सीखें</span></div><div><b>अभ्यास</b><span class="tiny">नियमित क्विज़</span></div><div><b>संदर्भ</b><span class="tiny">मूल स्रोत देखें</span></div></div></div></div>
-<div class="featuregrid" style="margin-top:17px"><div class="card feature"><span class="n">01 / STUDY</span><div class="symbol">📖</div><h3>उत्तर + व्याख्या</h3><p>सही विकल्प के साथ उत्तर क्यों सही है, यह सरल भाषा में जानें।</p></div><div class="card feature"><span class="n">02 / PROGRESS</span><div class="symbol">🪙</div><h3>कॉइन और स्तर</h3><p>प्रश्न हल करें, अपनी प्रगति देखें और अगले स्तर अनलॉक करें।</p></div><div class="card feature"><span class="n">03 / COMMUNITY</span><div class="symbol">🏆</div><h3>मासिक सम्मान</h3><p>पारदर्शी नियमों के साथ मासिक लीडरबोर्ड और पुरस्कार की योजना।</p></div></div></div></section>
-<section class="section" id="granth"><div class="wrap"><div class="secthead"><div><div class="kicker">Sacred Library</div><h2>ग्रंथ ज्ञान की यात्रा</h2><p>किसी भी श्रेणी को चुनकर उससे जुड़े नमूना क्विज़ तक जाएँ। विस्तृत पुस्तकालय बाद में सत्यापित सामग्री से भरा जा सकता है।</p></div></div><div class="grid3">
-<div class="card"><div class="bookicon">📜</div><h3>भगवद्गीता</h3><p>कर्मयोग, ज्ञान, भक्ति और जीवन के धर्म-संकट।</p><button class="linkbtn" onclick="chooseTopic('गीता')">गीता के प्रश्न →</button></div>
-<div class="card"><div class="bookicon">🏹</div><h3>रामायण</h3><p>श्रीराम, सीता, हनुमान और रामायण की विविध परंपराएँ।</p><button class="linkbtn" onclick="chooseTopic('रामायण')">रामायण के प्रश्न →</button></div>
-<div class="card"><div class="bookicon">⚔️</div><h3>महाभारत</h3><p>धर्म-संकट, नीति, नेतृत्व और महाकाव्य के प्रसंग।</p><button class="linkbtn" onclick="chooseTopic('महाभारत')">महाभारत के प्रश्न →</button></div>
-<div class="card"><div class="bookicon">🪷</div><h3>पुराण</h3><p>विष्णु, शिव, देवी, सृष्टि-कथाएँ और भक्ति-परंपराएँ।</p><button class="linkbtn" onclick="chooseTopic('पुराण')">पुराण के प्रश्न →</button></div>
-<div class="card"><div class="bookicon">🕉️</div><h3>उपनिषद</h3><p>आत्मा, ब्रह्म और दार्शनिक चिंतन।</p><button class="linkbtn" onclick="chooseTopic('उपनिषद')">उपनिषद के प्रश्न →</button></div>
-<div class="card"><div class="bookicon">🌼</div><h3>अन्य ग्रंथ</h3><p>स्तोत्र, दर्शन, धर्म-साहित्य और क्षेत्रीय परंपराएँ।</p><button class="linkbtn" onclick="chooseTopic('सभी ग्रंथ')">सभी प्रश्न →</button></div>
-</div></div></section>
-<section class="section" id="auth"><div class="wrap"><div class="secthead"><div><div class="kicker">Member Access</div><h2>Login करके ज्ञान यात्रा शुरू करें</h2><p>क्विज़ डैशबोर्ड सार्वजनिक होम पेज पर नहीं दिखेगा। पहले लॉगिन/साइनअप करें।</p></div></div><div class="authzone"><div class="authart"><div><div class="bigom">ॐ</div><h2 class="goldtext">आपका स्वागत है</h2><p class="tiny">Learn • Grow • Earn Rewards</p><p class="tiny">यह डेमो लॉगिन केवल इसी ब्राउज़र में स्थानीय रूप से सेव होता है। वास्तविक सुरक्षित अकाउंट के लिए सर्वर/ऑथेंटिकेशन जोड़ना होगा।</p></div></div><div class="card authcard"><h3 id="authTitle">अपने अकाउंट में लॉगिन करें</h3><div class="tabs"><button class="active" id="loginTab" onclick="switchAuth('login')">Login</button><button id="signupTab" onclick="switchAuth('signup')">Sign Up</button></div><form id="authForm"><label class="field">नाम (साइनअप के लिए)<input id="authName" placeholder="आपका नाम" autocomplete="name"></label><label class="field">ईमेल या मोबाइल नंबर<input id="authEmail" placeholder="name@example.com" required autocomplete="username"></label><label class="field">पासवर्ड<input id="authPassword" type="password" placeholder="कम से कम 4 अक्षर" required minlength="4" autocomplete="current-password"></label><button class="btn goldbtn" type="submit" id="authSubmit">Login & Continue →</button></form><p class="tiny" id="authNote">डेमो: यह वास्तविक ईमेल सत्यापन नहीं करता और संवेदनशील पासवर्ड किसी ऑनलाइन सर्वर पर नहीं भेजता।</p><button class="btn glassbtn" id="logoutBtn" style="display:none" onclick="logout()">Logout</button></div></div></div></section>
-<section class="section hidden" id="quiz"><div class="wrap"><div class="secthead"><div><div class="kicker">Members Only</div><h2>आपका क्विज़ डैशबोर्ड</h2><p>सही उत्तरों के बाद व्याख्या और संदर्भ पढ़ें।</p></div><button class="btn glassbtn" onclick="logout()">Logout</button></div><div class="quizwrap"><div class="card quizcard"><div class="quizmeta"><span id="quizTopic">विषय: सभी ग्रंथ</span><span class="badge" id="levelBadge">Normal</span></div><div class="progress"><span id="qprogress"></span></div><div class="quizmeta"><span id="qnumber">प्रश्न 1</span><span id="qcorrect">सही: 0</span></div><h3 class="qtext" id="question">प्रश्न लोड हो रहा है…</h3><div class="options" id="options"></div><div class="feedback" id="feedback"><h4 id="feedbackTitle">उत्तर</h4><div id="feedbackBody"></div><div class="verse" id="verse"></div></div><div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap"><span class="tiny" id="hint">एक उत्तर चुनें।</span><button class="btn goldbtn" id="nextBtn" onclick="nextQuestion()" disabled>अगला प्रश्न →</button></div></div><aside><div class="card"><h3>🎯 आपकी प्रगति</h3><p class="tiny">10 सही उत्तरों पर 50 डेमो कॉइन मिलेंगे। फिर Hard स्तर खुल जाएगा।</p><div class="progress"><span id="goalbar"></span></div><div class="quizmeta"><span id="goaltext">0 / 10 सही</span><span id="coinsText">0 🪙</span></div><div class="statrow"><div><b id="scoreText">0</b><span class="tiny">अंक</span></div><div><b id="doneText">0</b><span class="tiny">उत्तर दिए</span></div></div></div><div class="card" style="margin-top:15px"><h3>क्विज़ स्तर</h3><div class="mode" id="normalMode"><span>🌱 Normal<small>शुरुआती प्रश्न</small></span><b>खुला</b></div><div class="mode locked" id="hardMode"><span>🔥 Hard<small>गहन प्रश्न</small></span><b>🔒 लॉक</b></div><div class="mode locked" id="challengeMode"><span>🪔 Challenge<small>उन्नत अभ्यास</small></span><b>🔒 लॉक</b></div><p class="tiny" style="margin-top:12px">नोट: इस डेमो में सीमित नमूना प्रश्न हैं। अनलिमिटेड प्रश्नों के लिए सत्यापित प्रश्न-बैंक/AI सर्विस जोड़नी होगी।</p></div></aside></div></div></section>
-<section class="section" id="leaderboard"><div class="wrap"><div class="secthead"><div><div class="kicker">Monthly Recognition</div><h2>Leaderboard & Gifts</h2><p>नमूना तालिका—वास्तविक सार्वजनिक रैंकिंग के लिए सर्वर पर स्कोर सत्यापन चाहिए।</p></div></div><div class="pagesummary"><div class="card wide"><table class="leader"><thead><tr><th>रैंक</th><th>यूज़र</th><th>अंक</th><th>स्तर</th></tr></thead><tbody id="leaderBody"><tr><td class="rank">🥇 1</td><td>ज्ञान साधक</td><td>—</td><td>Expert</td></tr><tr><td class="rank">🥈 2</td><td>धर्म जिज्ञासु</td><td>—</td><td>Advanced</td></tr><tr><td class="rank">🥉 3</td><td>वेद पाठक</td><td>—</td><td>Advanced</td></tr></tbody></table></div><div class="giftbox"><div><h3>🎁 महीने का ज्ञान सम्मान</h3><p class="tiny">महीने के अंत में सबसे अच्छा प्रदर्शन करने वाले प्रतिभागी के लिए उपहार की योजना। पुरस्कार, पात्रता, टाई-ब्रेकर और घोषणा के नियम पहले से प्रकाशित करें।</p></div><div class="gifticon">🏆</div></div></div></div></section>
-<section class="section" id="reviews"><div class="wrap"><div class="secthead"><div><div class="kicker">Community Feedback</div><h2>Reviews & Ratings</h2><p>अपनी राय साझा करें। डेमो रिव्यू इसी ब्राउज़र में स्थानीय रूप से दिखते हैं।</p></div></div><div class="reviewlayout"><div class="card wide"><h3>⭐ अपना रिव्यू दें</h3><label class="field">नाम (वैकल्पिक)<input id="reviewName" placeholder="आपका नाम"></label><div class="tiny">रेटिंग चुनें</div><div class="stars" id="stars"><span data-n="1">★</span><span data-n="2">★</span><span data-n="3">★</span><span data-n="4">★</span><span data-n="5">★</span></div><label class="field">आपका सुझाव<textarea id="reviewText" rows="4" placeholder="आपको क्या अच्छा लगा?"></textarea></label><button class="btn goldbtn" onclick="submitReview()">रिव्यू सबमिट करें</button><p class="tiny">500+ रेटिंग का दावा तभी दिखाएँ जब 500 से अधिक वास्तविक, सत्यापित रिव्यू हों।</p></div><div class="card wide"><h3>समुदाय की राय</h3><p class="tiny" id="reviewDisclaimer">अभी कोई वास्तविक रिव्यू उपलब्ध नहीं है। अपने सुझाव से शुरुआत करें।</p><div class="reviews" id="reviewsList"></div></div></div></div></section>
-</main><footer class="footer"><div class="wrap footin"><span>© 2026 Sanatan AI • ज्ञान, श्रद्धा और संदर्भ</span><span>Prototype • धार्मिक संदर्भ प्रकाशन से पहले सत्यापित करें</span></div></footer><div class="toast" id="toast"></div>
+<div class="pg" id="p-home">
+<div class="hero">
+<div>
+<span class="badge sa">॥ सनातन धर्म ॥</span>
+<h1>Sanatan AI</h1>
+<p>Bharat ke pavitra granthon ka gyaan, ek sundar 3D anubhav me. Ramayan, Gita, Bhagwat, Mahabharat, Ved-Upanishad aur bahut kuch. Quiz khelkar seekhein, coins kamayein aur mahine ka gift jeeten.</p>
+<p style="margin-top:22px"><button class="btn" id="start">Quiz shuru karein →</button> &nbsp; <button class="btn alt" data-p="granth">Saare sections dekhein</button></p>
+<div class="stats"><div class="gl"><b>8</b><small>Sections</small></div><div class="gl"><b id="qn">0</b><small>Prashn + AI ∞</small></div><div class="gl"><b>100%</b><small>Nishulk</small></div></div>
+</div>
+<div class="cards3d" id="c3d">
+<div class="fc" style="left:10px;top:0;transform:translateZ(40px) rotateZ(-6deg)"><div class="ic" style="background:linear-gradient(135deg,#FFB347,#FF6A00)">🏹</div><b>Ramayan</b><small>Ayodhya se Lanka</small></div>
+<div class="fc" style="right:0;top:70px;transform:translateZ(90px) rotateZ(8deg);animation-delay:-1.2s"><div class="ic" style="background:linear-gradient(135deg,#FFD75E,#FF9F1C)">🪔</div><b>Gita</b><small>18 adhyay, 700 shlok</small></div>
+<div class="fc" style="left:40px;top:215px;transform:translateZ(20px) rotateZ(-4deg);animation-delay:-2.4s"><div class="ic" style="background:linear-gradient(135deg,#FFC24D,#E8890C)">📖</div><b>Bhagwat</b><small>12 skandh</small></div>
+<div class="fc" style="right:10px;top:290px;transform:translateZ(120px) rotateZ(5deg);animation-delay:-3.6s"><div class="ic" style="background:linear-gradient(135deg,#FF7A8A,#E0405A)">⚔️</div><b>Mahabharat</b><small>18 din ka yuddh</small></div>
+</div>
+</div>
+<h2 style="margin-top:30px">Kaise <b>kaam</b> karta hai</h2><p class="sub">Teen kadam me.</p>
+<div class="grid">
+<div class="gl tilt"><div class="num">01</div><h3 class="hd" style="margin:6px 0">Login karo</h3><p style="margin:0;color:var(--mut)">Apna naam daalo. Quiz login ke baad hi khulta hai.</p></div>
+<div class="gl tilt"><div class="num">02</div><h3 class="hd" style="margin:6px 0">Section chuno</h3><p style="margin:0;color:var(--mut)">8 granth-sections me se apni shraddha ka section, ya sab mila hua.</p></div>
+<div class="gl tilt"><div class="num">03</div><h3 class="hd" style="margin:6px 0">Seekho aur jeeto</h3><p style="margin:0;color:var(--mut)">Har jawab ke baad saar aur shlok. 10 sawal par 50 coins.</p></div>
+</div>
+</div>
+
+<div class="pg" id="p-granth" hidden>
+<h2>Gyaan ke <b>aath dwar</b></h2><p class="sub">Har section me alag-alag prashn. Apni shraddha ke anusar chunein.</p>
+<div class="grid" id="grid"></div>
+</div>
+
+<div class="pg" id="p-kyu" hidden>
+<h2>Ye website <b>kyu</b> banayi gayi?</h2><p class="sub">Sanatan granth bahut gehre hain, par aaj zyadatar log unhe padhne ka samay nahi nikaal paate. Quiz ek chhota aur rochak raasta hai.</p>
+<div class="grid">
+<div class="gl tilt"><h3 class="hd">Seekhna aasan</h3><p style="color:var(--mut)">Chhote sawal, turant jawab aur har jawab ke baad saar. Bina bore hue gyaan badhta hai.</p></div>
+<div class="gl tilt"><h3 class="hd">Shlok ke saath</h3><p style="color:var(--mut)">Sahi jawab ke neeche us vishay ka shlok ya chhand aur source dikhta hai, taaki jad tak pahunch sako.</p></div>
+<div class="gl tilt"><h3 class="hd">Khelte hue aage badho</h3><p style="color:var(--mut)">Normal se Hard aur phir Advanced. Coins kamao aur mahine ke ant me sabse achhe ko gift.</p></div>
+<div class="gl tilt"><h3 class="hd">Sawal anant</h3><p style="color:var(--mut)">AI mode me Claude naye sawal banata rehta hai, to kabhi sawal khatam nahi hote.</p></div>
+</div>
+<h2 style="margin:40px 0 10px;font-size:32px">Aksar puche jaane wale <b>sawal</b></h2>
+<div class="gl">
+<details><summary>Kya ye free hai?</summary><p>Haan, quiz khelna nishulk hai.</p></details>
+<details><summary>Login kaisa hai?</summary><p>Abhi naam wala login hai. Naam is browser me save hota hai. Password wala asli login ke liye alag server chahiye.</p></details>
+<details><summary>Unlimited sawal kaise?</summary><p>Quiz page par "∞ AI Sawal" on karo. Claude naye sawal banata hai. AI ke shlok ek baar jaanch lena.</p></details>
+<details><summary>Gift kaise milega?</summary><p>Mahine ke ant me leaderboard me sabse upar wale ko. Gift ki jaankari Inaam page par hai.</p></details>
+</div>
+</div>
+
+<div class="pg" id="p-reviews" hidden>
+<h2>Ratings aur <b>Reviews</b></h2><p class="sub" id="rv-sum">Abhi koi review nahi. Pehle aap likho.</p>
+<div class="grid"><div class="gl"><h3 class="hd" style="margin:0">Apni rating do</h3><div id="stars" role="radiogroup" aria-label="Rating"></div><textarea id="rv-t" maxlength="300" placeholder="Aapko Sanatan AI kaisa laga?"></textarea><p style="margin:12px 0 0"><button class="btn" id="rv-go">Review bhejo</button></p></div><div class="gl" id="rv-list"></div></div>
+</div>
+
+<div class="pg" id="p-inaam" hidden>
+<h2><b>Inaam</b> aur Leaderboard</h2><p class="sub">Mahine ke ant me sabse zyada ank wale ko gift: [GIFT YAHAN LIKHO].</p>
+<div class="grid">
+<div class="gl tilt"><div class="num">50</div><h3 class="hd" style="margin:4px 0">Coins</h3><p style="margin:0;color:var(--mut)">10 Normal sawal poore karne par milte hain.</p></div>
+<div class="gl tilt"><div class="num" id="dl">-</div><h3 class="hd" style="margin:4px 0">Din bache</h3><p style="margin:0;color:var(--mut)">Is mahine ke ant tak.</p></div>
+</div>
+<div class="gl" style="margin-top:18px"><h3 class="hd" style="margin:0 0 10px">Is mahine ke sabse aage</h3><ol id="lb"></ol><p id="shared-note" class="sub" style="display:none;margin:12px 0 0">Shared leaderboard aur reviews tab dikhte hain jab aap claude.ai me sign-in karke page kholo. Abhi sirf aapke apne ank dikh rahe hain.</p></div>
+</div>
+
+<div class="pg" id="p-quiz" hidden>
+<h2>Namaste, <b id="nm1">Sadhak</b></h2>
+<div class="chips" id="chips" style="margin-top:14px"></div>
+<div class="gl" id="qz" style="margin-top:16px">
+<div class="bar"><div class="tabs"><button class="tab on" data-l="normal">Normal</button><button class="tab" data-l="hard" disabled>Hard (locked)</button><button class="tab" data-l="adv" disabled>Advanced (locked)</button><button class="tab" id="ai">∞ AI Sawal: Off</button></div>
+<div class="stat">Coins: <b id="coins">0</b> &nbsp; Is mahine ke ank: <b id="ms">0</b></div></div>
+<div class="prog"><div id="pg"></div></div>
+<p id="pl" class="sub" style="margin:0 0 4px"></p><p class="sub" style="margin:0 0 10px">Sahi: <b id="acc">0%</b> · Streak: <b id="stk">0</b></p>
+<h3 id="q"></h3><div id="opts"></div>
+<div id="ex"><b id="ev"></b><p id="es" style="margin:6px 0"></p><div class="sl sa" id="esl"></div><small id="esr"></small></div>
+<p style="margin:18px 0 0"><button class="btn" id="nx" style="display:none">Agla sawal</button></p>
+</div>
+</div>
+</main>
+<footer>Sanatan AI · 7 rang · 1 Om · Anant gyaan</footer>
+
+<div id="lm"><div class="gl" role="dialog" aria-label="Login"><h3 class="hd" style="margin:0 0 6px;font-size:26px;color:var(--hd)">Login</h3><p class="sub" style="margin:0 0 14px">Apna naam daalo. Ye abhi demo login hai: naam sirf is browser me save hota hai.</p><input class="in" id="ln" maxlength="30" placeholder="Aapka naam"><p style="margin:16px 0 0;display:flex;gap:10px"><button class="btn" id="lg">Aage badho</button><button class="btn alt" id="lc">Rehne do</button></p></div></div>
+
 <script>
-const $=id=>document.getElementById(id);
-const questions=[
-{topic:'गीता',q:'भगवद्गीता में श्रीकृष्ण अर्जुन को किस युद्धभूमि में उपदेश देते हैं?',o:['कुरुक्षेत्र','लंका','मथुरा','पंचवटी'],a:0,s:'गीता का संवाद महाभारत के युद्ध से पहले कुरुक्षेत्र में श्रीकृष्ण और अर्जुन के बीच होता है। अर्जुन के धर्म-संकट के उत्तर में कर्म, ज्ञान, भक्ति और योग की शिक्षा दी जाती है।',v:'संदर्भ: भगवद्गीता, अध्याय 1–2 का संवाद-प्रसंग। श्लोक-संख्या चुने गए प्रामाणिक संस्करण से सत्यापित करें।'},
-{topic:'रामायण',q:'रामायण की प्रमुख परंपरा में श्रीराम के पिता कौन हैं?',o:['जनक','दशरथ','वसुदेव','शांतनु'],a:1,s:'वाल्मीकि रामायण की प्रमुख कथा-परंपरा में अयोध्या के राजा दशरथ श्रीराम के पिता हैं। राजा जनक सीता के पिता के रूप में जाने जाते हैं।',v:'संदर्भ: वाल्मीकि रामायण, बालकाण्ड में दशरथ और राम-जन्म का प्रसंग। सर्ग/श्लोक-संख्या संस्करणानुसार जाँचें।'},
-{topic:'महाभारत',q:'महाभारत में पांडवों की माता कुंती के एक प्रसिद्ध पुत्र कौन हैं?',o:['दुर्योधन','कर्ण','शकुनि','द्रोण'],a:1,s:'कर्ण भी कुंती के पुत्र हैं; उनकी कथा महाभारत में पहचान, निष्ठा और धर्म-संकट के जटिल प्रश्न उठाती है।',v:'संदर्भ: महाभारत, आदिपर्व में कुंती और कर्ण से संबंधित प्रसंग।'},
-{topic:'गीता',q:'भगवद्गीता का उपदेश मुख्य रूप से किसे दिया गया है?',o:['भीष्म','अर्जुन','विदुर','युधिष्ठिर'],a:1,s:'युद्ध को लेकर अर्जुन के मोह और धर्म-संकट के समय श्रीकृष्ण उन्हें उपदेश देते हैं।',v:'संदर्भ: भगवद्गीता, अध्याय 1–2 का प्रसंग।'},
-{topic:'पुराण',q:'पुराण साहित्य में किस प्रकार के विषय मिलते हैं?',o:['केवल गणित','सृष्टि-वर्णन, वंशावली और आख्यान','केवल नाटक','केवल युद्ध-नियम'],a:1,s:'पुराण साहित्य में सृष्टि-वर्णन, वंशावली, आख्यान, धर्म-आचरण और विभिन्न देव-परंपराओं से जुड़े विषय अलग-अलग रूपों में मिलते हैं।',v:'संदर्भ: पुराण साहित्य की सामान्य विधागत विशेषताएँ; विशिष्ट दावा करते समय मूल पाठ देखें।'},
-{topic:'उपनिषद',q:'उपनिषद मुख्यतः किन दार्शनिक प्रश्नों पर विचार करते हैं?',o:['आत्मा और ब्रह्म','केवल खेती','केवल व्यापार','केवल युद्धकला'],a:0,s:'अनेक उपनिषद आत्मा, ब्रह्म, ज्ञान और मुक्ति से जुड़े प्रश्नों पर संवाद और चिंतन प्रस्तुत करते हैं।',v:'संदर्भ: प्रमुख उपनिषदों की दार्शनिक विषय-वस्तु। उद्धरण से पहले संबंधित मंत्र सत्यापित करें।'},
-{topic:'रामायण',q:'प्रमुख रामायण परंपरा में सीता के स्वयंवर का प्रसंग किस नगर से जुड़ा है?',o:['अयोध्या','मिथिला','द्वारका','हस्तिनापुर'],a:1,s:'प्रमुख रामायण परंपरा में राजा जनक की नगरी मिथिला में सीता-स्वयंवर का प्रसंग आता है।',v:'संदर्भ: वाल्मीकि रामायण, बालकाण्ड में सीता-स्वयंवर का प्रसंग।'},
-{topic:'महाभारत',q:'भगवद्गीता किस महाकाव्य का हिस्सा है?',o:['रामायण','महाभारत','ऋग्वेद','अर्थशास्त्र'],a:1,s:'भगवद्गीता महाभारत के भीष्मपर्व में स्थित श्रीकृष्ण-अर्जुन संवाद है।',v:'संदर्भ: महाभारत, भीष्मपर्व; भगवद्गीता।'},
-{topic:'गीता',q:'गीता में अर्जुन के सारथी कौन हैं?',o:['बलराम','श्रीकृष्ण','संजय','भीम'],a:1,s:'श्रीकृष्ण युद्धभूमि में अर्जुन के सारथी बनते हैं और इसी भूमिका में उन्हें गीता का उपदेश देते हैं।',v:'संदर्भ: भगवद्गीता, अध्याय 1–2 का प्रसंग।'},
-{topic:'सभी ग्रंथ',q:'किसी श्लोक का संदर्भ सत्यापित करने का बेहतर तरीका क्या है?',o:['केवल सोशल मीडिया पर भरोसा','ग्रंथ, अध्याय और श्लोक विश्वसनीय संस्करण में जाँचना','बिना स्रोत साझा करना','केवल शीर्षक पढ़ना'],a:1,s:'प्रामाणिक अध्ययन के लिए मूल ग्रंथ, अध्याय/सर्ग, श्लोक-संख्या, अनुवादक और संस्करण की जाँच ज़रूरी है। पाठांतर भी मिल सकते हैं।',v:'अध्ययन सुझाव: मूल पाठ + विश्वसनीय अनुवाद + संदर्भ तुलना।'},
-{topic:'गीता',level:2,q:'गीता 2.47 में किस बात पर जोर दिया गया है?',o:['कर्म करने और फल के प्रति आसक्ति से बचने पर','केवल युद्ध जीतने पर','कर्म छोड़ देने पर','दूसरों के फल तय करने पर'],a:0,s:'गीता 2.47 कर्म करने और फल के प्रति आसक्ति से बचने की शिक्षा देता है। इसे परिणामों की जिम्मेदारी छोड़ना नहीं समझना चाहिए।',v:'संदर्भ: भगवद्गीता 2.47। सटीक उद्धरण/अनुवाद अपने चुने हुए संस्करण से सत्यापित करें।'},
-{topic:'महाभारत',level:2,q:'महाभारत के यक्ष-प्रश्न प्रसंग में उत्तर देने वाला पांडव कौन है?',o:['भीम','अर्जुन','युधिष्ठिर','नकुल'],a:2,s:'यक्ष-प्रश्न प्रसंग में युधिष्ठिर के उत्तर उनकी विवेकशीलता और धर्म-बोध को दर्शाते हैं।',v:'संदर्भ: महाभारत, वनपर्व, यक्ष-प्रश्न प्रसंग।'},
-{topic:'रामायण',level:2,q:'वाल्मीकि रामायण में हनुमान जी सीता की खोज में किस स्थान पर पहुँचते हैं?',o:['अशोक वाटिका','कुरुक्षेत्र','नैमिषारण्य','गोकुल'],a:0,s:'सुंदरकाण्ड में हनुमान जी लंका पहुँचकर अशोक वाटिका में सीता जी को खोजते हैं और श्रीराम का संदेश देते हैं।',v:'संदर्भ: वाल्मीकि रामायण, सुंदरकाण्ड; अशोक वाटिका का प्रसंग।'},
-{topic:'पुराण',level:2,q:'श्रीमद्भागवत महापुराण में किस भक्ति-परंपरा का विशेष महत्व है?',o:['कृष्ण-भक्ति सहित विष्णु-भक्ति','केवल राजकीय इतिहास','केवल चिकित्सा','केवल स्थापत्य'],a:0,s:'श्रीमद्भागवत महापुराण में विष्णु और विशेषकर कृष्ण से संबंधित कथाओं तथा भक्ति का प्रमुख स्थान है।',v:'संदर्भ: श्रीमद्भागवत महापुराण; दशम स्कन्ध में कृष्ण-कथा।'}
-];
-let authMode='login',currentUser=null,topic='सभी ग्रंथ',qIndex=0,answered=false,correct=0,coins=0,score=0,done=0,hard=false,rewarded=false,rating=0;
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),3000)}
-function switchAuth(m){authMode=m;$('loginTab').classList.toggle('active',m==='login');$('signupTab').classList.toggle('active',m==='signup');$('authTitle').textContent=m==='login'?'अपने अकाउंट में लॉगिन करें':'नया अकाउंट बनाएँ';$('authName').classList.toggle('hidden',m==='login');$('authSubmit').textContent=m==='login'?'Login & Continue →':'Create Account →';$('authNote').textContent='डेमो अकाउंट केवल इस ब्राउज़र में सेव होता है। वास्तविक सुरक्षित अकाउंट के लिए सर्वर-आधारित ऑथेंटिकेशन चाहिए।'}
-function loadUser(){try{return JSON.parse(localStorage.getItem('sanatanai_user')||'null')}catch{return null}}
-function saveState(){if(!currentUser)return;localStorage.setItem('sanatanai_state_'+currentUser.id,JSON.stringify({correct,coins,score,done,hard,rewarded}))}
-function authSuccess(user){currentUser=user;let state={};try{state=JSON.parse(localStorage.getItem('sanatanai_state_'+user.id)||'{}')}catch{};correct=state.correct||0;coins=state.coins||0;score=state.score||0;done=state.done||0;hard=!!state.hard;rewarded=!!state.rewarded;$('navUser').textContent='नमस्ते, '+user.name;$('navUser').classList.remove('hidden');$('navCoins').classList.remove('hidden');$('navAuth').textContent='Logout';$('navAuth').onclick=logout;$('logoutBtn').style.display='inline-block';$('quiz').classList.remove('hidden');updateProgress();renderQ();toast('लॉगिन सफल! आपका क्विज़ डैशबोर्ड खुल गया।')}
-$('authForm').addEventListener('submit',e=>{e.preventDefault();let email=$('authEmail').value.trim(),password=$('authPassword').value,name=$('authName').value.trim()||email.split('@')[0]||'ज्ञान साधक';if(password.length<4){toast('पासवर्ड कम से कम 4 अक्षर का रखें।');return}let id=email.toLowerCase();let users={};try{users=JSON.parse(localStorage.getItem('sanatanai_users')||'{}')}catch{}if(authMode==='signup'){if(users[id]){toast('यह ईमेल/मोबाइल इस डेमो में पहले से मौजूद है। Login करें।');return}users[id]={id,name,email:id,pass:password};localStorage.setItem('sanatanai_users',JSON.stringify(users));localStorage.setItem('sanatanai_session',id);authSuccess(users[id])}else{if(!users[id]||users[id].pass!==password){toast('डेमो अकाउंट नहीं मिला। पहले Sign Up करें या सही जानकारी दें।');return}localStorage.setItem('sanatanai_session',id);authSuccess(users[id])}});
-function logout(){saveState();currentUser=null;localStorage.removeItem('sanatanai_session');$('navUser').classList.add('hidden');$('navCoins').classList.add('hidden');$('navAuth').textContent='Login / Sign up';$('navAuth').onclick=()=>document.querySelector('#auth').scrollIntoView({behavior:'smooth'});$('logoutBtn').style.display='none';$('quiz').classList.add('hidden');toast('आप लॉगआउट हो गए। क्विज़ के लिए फिर Login करें।');document.querySelector('#auth').scrollIntoView({behavior:'smooth'})}
-function goQuiz(){if(!currentUser){toast('क्विज़ खेलने के लिए पहले Login या Sign Up करें।');document.querySelector('#auth').scrollIntoView({behavior:'smooth'});return}$('quiz').classList.remove('hidden');$('quiz').scrollIntoView({behavior:'smooth'})}
-function chooseTopic(t){topic=t;if(!currentUser){toast('पहले Login करें। लॉगिन के बाद चुने हुए विषय का क्विज़ शुरू होगा।');document.querySelector('#auth').scrollIntoView({behavior:'smooth'});return}qIndex=0;renderQ();goQuiz()}
-function pool(){return questions.filter(q=>(!q.level||q.level===(hard?2:1))&&(topic==='सभी ग्रंथ'||q.topic===topic||q.topic==='सभी ग्रंथ'))}
-function renderQ(){if(!currentUser)return;let list=pool();if(!list.length)list=questions.filter(q=>!q.level||q.level===(hard?2:1));if(qIndex>=list.length)qIndex=0;let q=list[qIndex];answered=false;$('quizTopic').textContent='विषय: '+topic;$('levelBadge').textContent=hard?'Hard स्तर':'Normal स्तर';$('question').textContent=q.q;$('qnumber').textContent='प्रश्न '+(qIndex+1)+' • नमूना बैंक';$('qcorrect').textContent='सही: '+correct;$('qprogress').style.width=((qIndex+1)/list.length*100)+'%';$('feedback').classList.remove('show');$('nextBtn').disabled=true;$('hint').textContent='एक उत्तर चुनें।';$('options').innerHTML='';q.o.forEach((opt,i)=>{let b=document.createElement('button');b.className='option';b.textContent=String.fromCharCode(65+i)+'. '+opt;b.onclick=()=>answerQ(i,b,q);$('options').appendChild(b)});updateProgress()}
-function answerQ(i,btn,q){if(answered)return;answered=true;done++;let bs=[...document.querySelectorAll('.option')];bs.forEach((b,j)=>{b.disabled=true;if(j===q.a)b.classList.add('good')});if(i===q.a){correct++;score+=10;btn.classList.add('good');$('feedbackTitle').textContent='✅ बिल्कुल सही!';$('feedbackTitle').style.color='var(--green)';$('hint').textContent='+10 अंक';if(correct>=10&&!rewarded){coins+=50;rewarded=true;hard=true;toast('बधाई! 10 सही उत्तर पूरे—50 कॉइन मिले और Hard स्तर अनलॉक हुआ।')}}else{btn.classList.add('bad');$('feedbackTitle').textContent='📚 सही उत्तर: '+q.o[q.a];$('feedbackTitle').style.color='var(--gold)';$('hint').textContent='व्याख्या पढ़ें और आगे बढ़ें।'}$('feedbackBody').textContent=q.s;$('verse').textContent=q.v;$('feedback').classList.add('show');$('nextBtn').disabled=false;updateProgress();saveState()}
-function nextQuestion(){qIndex++;renderQ()}
-function updateProgress(){if(!currentUser)return;$('navCoins').textContent='🪙 '+coins;$('goalbar').style.width=Math.min(correct/10*100,100)+'%';$('goaltext').textContent=Math.min(correct,10)+' / 10 सही';$('coinsText').textContent=coins+' 🪙';$('scoreText').textContent=score;$('doneText').textContent=done;$('normalMode').classList.toggle('locked',false);$('hardMode').classList.toggle('locked',!hard);$('hardMode').querySelector('b').textContent=hard?'खुला':'🔒 लॉक';$('challengeMode').classList.toggle('locked',!hard);$('challengeMode').querySelector('b').textContent=hard?'आगे':'🔒 लॉक'}
-$('stars').querySelectorAll('span').forEach(s=>s.onclick=()=>{rating=+s.dataset.n;$('stars').querySelectorAll('span').forEach(x=>x.classList.toggle('on',+x.dataset.n<=rating))});
-function submitReview(){let txt=$('reviewText').value.trim();if(!rating){toast('पहले स्टार रेटिंग चुनें।');return}if(!txt){toast('अपना सुझाव लिखें।');return}let r={name:$('reviewName').value.trim()||'गुमनाम',rating,text:txt};let arr=[];try{arr=JSON.parse(localStorage.getItem('sanatanai_reviews')||'[]')}catch{}arr.unshift(r);localStorage.setItem('sanatanai_reviews',JSON.stringify(arr.slice(0,30)));$('reviewName').value='';$('reviewText').value='';rating=0;$('stars').querySelectorAll('span').forEach(x=>x.classList.remove('on'));renderReviews();toast('धन्यवाद! आपका रिव्यू इस ब्राउज़र में सेव हुआ।')}
-function renderReviews(){let arr=[];try{arr=JSON.parse(localStorage.getItem('sanatanai_reviews')||'[]')}catch{};$('reviewsList').innerHTML='';if(!arr.length){$('reviewDisclaimer').textContent='अभी कोई वास्तविक रिव्यू उपलब्ध नहीं है। अपने सुझाव से शुरुआत करें।';return}$('reviewDisclaimer').textContent='इस ब्राउज़र में सेव किए गए डेमो रिव्यू। यह सार्वजनिक सर्वर पर अपलोड नहीं होते।';arr.forEach(r=>{let d=document.createElement('div');d.className='review';let b=document.createElement('b');b.textContent=r.name+' · '+'★'.repeat(r.rating);let p=document.createElement('p');p.textContent=r.text;d.append(b,p);$('reviewsList').append(d)})}
-function restoreSession(){let id=localStorage.getItem('sanatanai_session');if(!id)return;let users={};try{users=JSON.parse(localStorage.getItem('sanatanai_users')||'{}')}catch{}if(users[id])authSuccess(users[id])}
-renderReviews();restoreSession();
-</script></body></html>
+var QB=[["normal", "gita", "Bhagavad Gita me kitne adhyay hain?", ["12", "18", "24", "10"], 1, "Gita ke 18 adhyay hain, jisme kul 700 shlok mane jate hain.", "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥", "Bhagavad Gita 18.66"], ["normal", "ramayan", "Valmiki Ramayan ke rachayita kaun hain?", ["Vyas", "Tulsidas", "Valmiki", "Kalidas"], 2, "Ramayan ke adi kavi Maharshi Valmiki hain. Tulsidas ne baad me Ramcharitmanas likha.", "रामो विग्रहवान् धर्मः साधुः सत्यपराक्रमः।", "Valmiki Ramayan, Aranya Kand"], ["normal", "mahabharat", "Mahabharat me kitne parva hain?", ["12", "18", "7", "24"], 1, "Mahabharat Maharshi Vyas ki rachna hai aur isme 18 parva hain.", "यतः कृष्णस्ततो धर्मो यतो धर्मस्ततो जयः।", "Mahabharat"], ["normal", "mahabharat", "Panch Pandav me sabse bade bhai kaun the?", ["Arjun", "Bhim", "Yudhishthir", "Nakul"], 2, "Yudhishthir sabse bade the aur satya aur dharma ke liye jane jate the.", "सत्यमेव जयते नानृतं सत्येन पन्था विततो देवयानः।", "Mundaka Upanishad 3.1.6"], ["normal", "ramayan", "Shri Ram ko kitne varsh ka vanvas mila?", ["10", "12", "14", "7"], 2, "Kaikeyi ke vachan par Ram 14 varsh ke vanvas par gaye.", "रघुकुल रीति सदा चलि आई।\nप्रान जाहुँ बरु बचनु न जाई॥", "Ramcharitmanas, Ayodhya Kand"], ["normal", "ramayan", "Hanuman ji ne Sita mata ka pata kis kand me lagaya?", ["Bal Kand", "Sundar Kand", "Yuddh Kand", "Uttar Kand"], 1, "Ramayan ka 5va kand Sundar Kand hai, jisme Hanuman ki Lanka yatra ka varnan hai.", "जय हनुमान ज्ञान गुन सागर।\nजय कपीस तिहुँ लोक उजागर॥", "Hanuman Chalisa"], ["normal", "ved", "Ved kitne hain?", ["2", "3", "4", "6"], 2, "Ved 4 hain: Rig, Yajur, Sam aur Atharva.", "असतो मा सद्गमय। तमसो मा ज्योतिर्गमय।\nमृत्योर्मा अमृतं गमय॥", "Brihadaranyaka Upanishad 1.3.28"], ["normal", "mahabharat", "Kauravo ki sankhya kitni thi?", ["50", "100", "101", "10"], 1, "Dhritarashtra aur Gandhari ke 100 putra Kaurav kahlaye.", "धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः।\nमामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय॥", "Bhagavad Gita 1.1"], ["normal", "ramayan", "Ramcharitmanas ke rachayita kaun hain?", ["Tulsidas", "Surdas", "Kabir", "Valmiki"], 0, "Goswami Tulsidas ne Ramcharitmanas awadhi bhasha me likha.", "होइहि सोइ जो राम रचि राखा।\nको करि तर्क बढ़ावै साखा॥", "Ramcharitmanas, Bal Kand"], ["normal", "gita", "Gita ka updesh kisne kisko diya?", ["Krishna ne Arjun ko", "Ram ne Hanuman ko", "Vyas ne Ganesh ko", "Bhishm ne Yudhishthir ko"], 0, "Kurukshetra me Shri Krishna ne Arjun ko Gita ka updesh diya.", "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥", "Bhagavad Gita 2.47"], ["hard", "gita", "Gita ke kis adhyay me Vishwaroop darshan hai?", ["9", "11", "13", "15"], 1, "11va adhyay Vishwaroop Darshan Yog hai, jisme Arjun Krishna ka virat roop dekhte hain.", "दिवि सूर्यसहस्रस्य भवेद्युगपदुत्थिता।\nयदि भाः सदृशी सा स्याद्भासस्तस्य महात्मनः॥", "Bhagavad Gita 11.12"], ["hard", "gita", "Gita ke anusar Bhim ke shankh ka naam kya tha?", ["Panchjanya", "Devdatt", "Paundram", "Anantvijay"], 2, "Krishna ka Panchjanya, Arjun ka Devdatt aur Bhim ka Paundram shankh tha.", "पाञ्चजन्यं हृषीकेशो देवदत्तं धनञ्जयः।\nपौण्ड्रं दध्मौ महाशङ्खं भीमकर्मा वृकोदरः॥", "Bhagavad Gita 1.15"], ["hard", "mahabharat", "Vishnu Sahasranam Mahabharat ke kis parva me aata hai?", ["Vana Parva", "Bhishma Parva", "Anushasan Parva", "Udyog Parva"], 2, "Shar-shayya par lete Bhishm ne Yudhishthir ko Vishnu Sahasranam sunaya (Anushasan Parva).", "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्।\nप्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये॥", "Vishnu Sahasranam, dhyan shlok"], ["hard", "mahabharat", "Yaksh Prashn Mahabharat ke kis parva me hai?", ["Vana Parva", "Virat Parva", "Shanti Parva", "Adi Parva"], 0, "Yaksh ne Yudhishthir se prashn puchhe aur sahi jawab se char Pandav jivit hue (Vana Parva).", "धर्मस्य तत्त्वं निहितं गुहायां\nमहाजनो येन गतः स पन्थाः॥", "Mahabharat, Vana Parva"], ["hard", "ramayan", "Valmiki Ramayan me kul kitne kand hain?", ["5", "6", "7", "8"], 2, "Bal, Ayodhya, Aranya, Kishkindha, Sundar, Yuddh aur Uttar: kul 7 kand.", "यावत् स्थास्यन्ति गिरयः सरितश्च महीतले।\nतावद् रामायणकथा लोकेषु प्रचरिष्यति॥", "Valmiki Ramayan, Bal Kand"], ["adv", "gita", "Gita ke 15ve adhyay me sansar ko kis vriksh se jodkar bataya gaya hai?", ["Bargad", "Ashvattha (peepal)", "Neem", "Amla"], 1, "Purushottam Yog me sansar ko ulte mool wale Ashvattha vriksh ke roop me samjhaya gaya hai.", "ऊर्ध्वमूलमधःशाखमश्वत्थं प्राहुरव्ययम्।\nछन्दांसि यस्य पर्णानि यस्तं वेद स वेदवित्॥", "Bhagavad Gita 15.1"], ["adv", "gita", "Gita Mahabharat ke kis parva ka bhag hai?", ["Adi Parva", "Bhishma Parva", "Drona Parva", "Shanti Parva"], 1, "Gita Bhishma Parva ke adhyay 25 se 42 tak aati hai.", "न जायते म्रियते वा कदाचि-\nन्नायं भूत्वा भविता वा न भूयः॥", "Bhagavad Gita 2.20"], ["adv", "ved", "Mahavakya 'Tattvamasi' kis Upanishad me hai?", ["Mundaka", "Chandogya", "Isha", "Katha"], 1, "Chandogya Upanishad me Uddalak apne putra Shvetketu ko 'Tattvamasi' ka updesh dete hain.", "स य एषोऽणिमैतदात्म्यमिदं सर्वं तत्सत्यं स आत्मा तत्त्वमसि श्वेतकेतो॥", "Chandogya Upanishad 6.8.7"], ["normal", "bhagwat", "Shrimad Bhagwat Puran me kitne skandh hain?", ["10", "12", "18", "7"], 1, "Bhagwat Puran 12 skandh me hai aur bhakti ka pramukh granth mana jata hai.", "ॐ नमो भगवते वासुदेवाय।", "Bhagwat Puran, dwadashakshar mantra"], ["normal", "bhagwat", "Bhagwat Puran kisne kisko sunaya?", ["Vyas ne Ganesh ko", "Shukdev ji ne Raja Parikshit ko", "Narad ne Valmiki ko", "Suta ne Arjun ko"], 1, "Shukdev ji ne Raja Parikshit ko saat din tak yeh katha sunayi.", "एते चांशकलाः पुंसः कृष्णस्तु भगवान् स्वयम्।", "Bhagwat Puran 1.3.28"], ["hard", "bhagwat", "Gajendra moksha ki katha Bhagwat Puran ke kis skandh me hai?", ["Pehle", "Aathve", "Dasve", "Barahve"], 1, "Gajendra moksha Aathve skandh me hai, jahan Bhagwan Vishnu hathi ko graah se bachate hain.", "ॐ नमो भगवते तस्मै यत एतच्चिदात्मकम्।\nपुरुषायादिबीजाय परेशायाभिधीमहि॥", "Bhagwat Puran 8.3.2"], ["normal", "krishna", "Shri Krishna ka janm kahan hua?", ["Gokul", "Vrindavan", "Mathura", "Dwarka"], 2, "Krishna ka janm Mathura ke karagar me hua; baad me Gokul me pale.", "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥", "Bhagavad Gita 4.7"], ["normal", "krishna", "Mama Kans ka vadh kisne kiya?", ["Balram", "Arjun", "Shri Krishna", "Pradyumn"], 2, "Krishna ne Mathura me Kans ka vadh kiya aur Ugrasen ko gaddi lautayi.", "परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥", "Bhagavad Gita 4.8"], ["hard", "krishna", "Govardhan leela me Krishna ne parvat kitne din uthaye rakha?", ["3 din", "5 din", "7 din", "10 din"], 2, "Indra ke prakop se Vrindavan ko bachane ke liye Krishna ne 7 din Govardhan uthaya.", "यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः।\nतत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम॥", "Bhagavad Gita 18.78"], ["normal", "shiv", "Mahashivratri kiski aaradhana ka mukhya parv hai?", ["Vishnu", "Shiv-Parvati", "Brahma", "Indra"], 1, "Mahashivratri par Shiv aur Parvati ki puja hoti hai.", "ॐ नमः शिवाय।", "Panchakshar mantra"], ["normal", "shiv", "Shiv ji ke gale me kaun sa jeev lipta rehta hai?", ["Sarp", "Mor", "Sher", "Hans"], 0, "Mahadev ke gale me sarp hai, jo nirbhayata aur kaal par vijay ka pratik mana jata hai.", "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय माऽमृतात्॥", "Rigved 7.59.12, Mahamrityunjay mantra"], ["hard", "shiv", "Shiv ji ke dhanush ka naam kya tha?", ["Gandiv", "Sharang", "Pinak", "Vijay"], 2, "Shiv ke dhanush Pinak ko Sita swayamvar me Shri Ram ne toda.", "नागेन्द्रहाराय त्रिलोचनाय भस्माङ्गरागाय महेश्वराय।", "Shiv Panchakshar Stotra"], ["normal", "hanuman", "Hanuman Chalisa me kitni chaupai hain?", ["20", "40", "108", "51"], 1, "Hanuman Chalisa me 40 chaupai hain, jise Tulsidas ne likha.", "जय हनुमान ज्ञान गुन सागर।\nजय कपीस तिहुँ लोक उजागर॥", "Hanuman Chalisa"], ["normal", "hanuman", "Hanuman ji ko Pavan-putra kyu kaha jata hai?", ["Wo Vayu dev ke putra mane jate hain", "Wo Pavan nagar me rahte the", "Unhone hawa se yudh kiya", "Wo Pavan raja ke bhai the"], 0, "Hanuman ji Anjani aur Vayu dev ke putra mane jate hain.", "रामदूत अतुलित बल धामा।\nअंजनि-पुत्र पवनसुत नामा॥", "Hanuman Chalisa"], ["normal", "hanuman", "Hanuman Chalisa ke rachayita kaun hain?", ["Valmiki", "Tulsidas", "Kabir", "Meera"], 1, "Hanuman Chalisa Goswami Tulsidas ki rachna hai.", "बुद्धिहीन तनु जानिके सुमिरौं पवन-कुमार।\nबल बुद्धि विद्या देहु मोहि हरहु कलेस बिकार॥", "Hanuman Chalisa, doha"], ["hard", "hanuman", "Hanuman Chalisa ke anusar bachpan me Hanuman ne suraj ko kya samajhkar nigal liya?", ["Laal gola", "Madhur fal", "Moti", "Agni kund"], 1, "Chalisa ke anusar balak Hanuman ne suraj ko madhur fal samajh liya.", "जुग सहस्र जोजन पर भानू।\nलील्यो ताहि मधुर फल जानू॥", "Hanuman Chalisa"], ["normal", "ved", "Satyamev Jayate kis Upanishad se liya gaya hai?", ["Mundaka", "Isha", "Prashna", "Mandukya"], 0, "Satyamev Jayate Mundaka Upanishad se liya gaya hai.", "सत्यमेव जयते नानृतं सत्येन पन्था विततो देवयानः।", "Mundaka Upanishad 3.1.6"]];
+var SECS=[["ramayan","Ramayan","Shri Ram ki katha — Valmiki Ramayan","Ayodhya se Lanka tak. 7 kand me Maryada Purushottam Shri Ram, Mata Sita, Hanuman ji aur Ravan ki katha.","🏹","#FFB347,#FF6A00"],
+["gita","Shrimad Bhagavad Gita","Karm, Gyan aur Bhakti ka divya sandesh","Kurukshetra me Shri Krishna ne Arjun ko jo updesh diya — 18 adhyay, 700 shlok.","🪔","#FFD75E,#FF9F1C"],
+["bhagwat","Shrimad Bhagwat Puran","12 skandh — bhakti ka shastra","Shukdev ji ne Raja Parikshit ko sunaya — Krishna ki leela, Prahlad, Dhruv aur Gajendra moksha.","📖","#FFC24D,#E8890C"],
+["mahabharat","Mahabharat","Pandav aur Kaurav — dharm ka sangram","Ved Vyas ki maha-katha, 18 parva, Kurukshetra ka 18 din ka yuddh aur Gita.","⚔️","#FF7A8A,#E0405A"],
+["ved","Ved & Upanishad","Gyan ka mool srot","Char Ved aur Upanishad — Satyamev Jayate, Aham Brahmasmi, Tat Tvam Asi jaise mahavakya.","🕉️","#3EE0C0,#1A9E8F"],
+["hanuman","Hanuman Chalisa","Sankat Mochan Mahabali Hanuman","Goswami Tulsidas ji ki 40 chaupai — bal, buddhi aur bhakti ki katha.","🚩","#FF8A4C,#E5481B"],
+["krishna","Shri Krishna Leela","Mathura, Gokul, Vrindavan se Dwarka tak","Janm se Govardhan leela tak — Kanha ki bal-leela, Radha, gopiyan aur Gita ka gyan.","🦚","#5CC8FF,#2A7FDB"],
+["shiv","Shiv & Shakti","Mahadev aur Adishakti","Kailash ke Mahadev, Mata Parvati, Ganesh-Kartikeya aur Mahashivratri ki katha.","🔱","#C79BFF,#8A4DE0"]];
+var $=function(i){return document.getElementById(i)},camT=[0,0,9,0],pend=null;
+var N={normal:10,hard:10},PT={normal:10,hard:20,adv:30},mk=new Date().toISOString().slice(0,7);
+var S={user:'',coins:0,n:0,h:0,lvl:'normal',sec:'all',ms:{},ok:0,tot:0,stk:0};
+try{var sv=JSON.parse(localStorage.getItem('sanatanai')||'null');if(sv)for(var k in sv)S[k]=sv[k]}catch(e){}
+function save(){try{localStorage.setItem('sanatanai',JSON.stringify(S))}catch(e){}}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');setTimeout(function(){t.classList.remove('on')},4200)}
+function secName(id){for(var i=0;i<SECS.length;i++)if(SECS[i][0]===id)return SECS[i][1];return 'Sab'}
+/* pages + login */
+var CAM={home:[0,0,9,0],granth:[-2,1.5,8,.15],kyu:[2,-1,8.5,-.15],reviews:[-1.5,-1.5,8,.1],inaam:[1.5,1.5,8.5,-.1],quiz:[0,0,7,0]};
+function go(p){
+ if(p==='quiz'&&!S.user){pend='quiz';openLogin();return}
+ var el=$('p-'+p);if(!el)return;
+ document.querySelectorAll('.pg').forEach(function(e){e.hidden=e!==el});
+ el.classList.remove('flip');void el.offsetWidth;el.classList.add('flip');
+ document.querySelectorAll('#nav [data-p]').forEach(function(a){a.classList.toggle('on',a.dataset.p===p)});
+ camT=CAM[p]||CAM.home;scrollTo(0,0);if(p==='quiz')load();
+}
+document.querySelectorAll('[data-p]').forEach(function(a){a.addEventListener('click',function(){go(a.dataset.p)})});
+function ui(){document.body.classList.toggle('in',!!S.user);$('who').textContent=S.user;$('nm1').textContent=S.user||'Sadhak'}
+function openLogin(){$('lm').classList.add('on');$('ln').focus()}
+$('li').onclick=openLogin;$('lc').onclick=function(){$('lm').classList.remove('on');pend=null};
+$('lg').onclick=function(){S.user=($('ln').value.trim()||'Sadhak').slice(0,30);save();ui();$('lm').classList.remove('on');var p=pend||'quiz';pend=null;go(p)};
+$('ln').addEventListener('keydown',function(e){if(e.key==='Enter')$('lg').click()});
+$('lo').onclick=function(){S.user='';save();ui();go('home')};
+$('start').onclick=function(){go('quiz')};
+$('qn').textContent=QB.length;
+/* section cards + chips */
+var gh='',ch='<button class="chip" data-s="all">Sab</button>';
+SECS.forEach(function(s){var c=QB.filter(function(x){return x[1]===s[0]}).length;
+ gh+='<div class="gl sc tilt" data-s="'+s[0]+'"><div class="top"><div class="ic" style="background:linear-gradient(135deg,'+s[5]+')">'+s[4]+'</div><span class="pill">'+c+' prashn + AI</span></div><h3>'+s[1]+'</h3><small>'+s[2]+'</small><p>'+s[3]+'</p></div>';
+ ch+='<button class="chip" data-s="'+s[0]+'">'+s[1]+'</button>'});
+$('grid').innerHTML=gh;$('chips').innerHTML=ch;
+document.querySelectorAll('.sc').forEach(function(c){c.onclick=function(){S.sec=c.dataset.s;save();go('quiz')}});
+document.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){S.sec=c.dataset.s;save();load()}});
+/* quiz engine */
+var queue={},cur=null,done=false,asked=[],aiOn=false,aiBuf={},aiBusy=false,sampleNs=null,dbn=null,un=null,uid=null,cw=false,RV=[],SC=[],stars=0;
+function toQ(x){return[x[2],x[3],x[4],x[5],x[6],x[7],false]}
+function pool(l,s){var a=QB.filter(function(x){return x[0]===l&&(s==='all'||x[1]===s)});return a.length?a:QB.filter(function(x){return x[0]===l})}
+function key(L){return L+'|'+S.sec}
+function nextQ(L){var k=key(L);if(aiOn){aiBuf[k]=aiBuf[k]||[];if(aiBuf[k].length<3)fetchAI(L);if(aiBuf[k].length)return aiBuf[k].pop()}
+ if(!queue[k]||!queue[k].length)queue[k]=shuffle(pool(L,S.sec).map(toQ));return queue[k].pop()}
+function updAI(){$('ai').textContent='∞ AI Sawal: '+(aiOn?'On':'Off');$('ai').classList.toggle('on',aiOn)}
+async function fetchAI(L){
+ if(aiBusy||!sampleNs)return;aiBusy=true;var k=key(L),sec=S.sec;
+ var d=L==='normal'?'aasan (basic tathya)':L==='hard'?'kathin (adhyay, parva, kand, patra-sambandhi tathya)':'bahut kathin (Upanishad, Puran, gehre darshanik sawal)';
+ var tp=sec==='all'?'Sanatan dharm ke granth (Gita, Ramayan, Mahabharat, Puran, Upanishad, Ved)':secName(sec);
+ try{
+  var r=await sampleNs.json('Tum Sanatan dharm ke vidwan ho. Vishay: '+tp+'. 5 naye alag MCQ banao, kathinta: '+d+'. Sirf wahi tathya aur shlok likho jinke baare me tum pakke ho; shlok Devanagari me ekdum sahi ho aur source (granth aur adhyay/shlok sankhya) ke saath. Sawal aur saar Hinglish (Roman Hindi) me. Ye sawal dobara mat banao: '+asked.join(' | ')+'. Sirf JSON array lautao: [{"q":"","o":["","","",""],"a":0,"s":"ek line saar","sh":"shlok Devanagari","src":"source"}] jahan a sahi option ka index (0 se 3) hai.',{cache:false});
+  aiBuf[k]=aiBuf[k]||[];
+  if(Array.isArray(r))r.forEach(function(x){
+   if(!x||typeof x.q!=='string'||!Array.isArray(x.o)||x.o.length!==4||!(x.a>=0&&x.a<4)||typeof x.s!=='string'||typeof x.sh!=='string'||typeof x.src!=='string')return;
+   var ct=x.o[x.a],o=shuffle(x.o);aiBuf[k].push([x.q,o,o.indexOf(ct),x.s,x.sh,x.src,true])});
+ }catch(e){if(e&&e.code==='not_granted'){aiOn=false;updAI();toast('AI sawal ki ijazat nahi mili.')}}
+ aiBusy=false;
+}
+$('ai').onclick=async function(){
+ if(aiOn){aiOn=false;updAI();return}
+ sampleNs=sampleNs||(window.claude&&await claude.use('sample'));
+ if(!sampleNs){toast('AI sawal is jagah available nahi hai.');return}
+ aiOn=true;updAI();toast('AI naye sawal bana raha hai. Tab tak purane sawal aayenge.');fetchAI(S.lvl);
+};
+function render(){
+ $('coins').textContent=S.coins;$('ms').textContent=S.ms[mk]||0;
+ $('acc').textContent=(S.tot?Math.round((S.ok||0)/S.tot*100):0)+'%';$('stk').textContent=S.stk||0;renderLb();
+ var hu=S.n>=N.normal,au=S.h>=N.hard;
+ document.querySelectorAll('.tab[data-l]').forEach(function(b){var l=b.dataset.l;b.classList.toggle('on',l===S.lvl);
+  if(l==='hard'){b.disabled=!hu;b.textContent=hu?'Hard':'Hard (locked)'}
+  if(l==='adv'){b.disabled=!au;b.textContent=au?'Advanced':'Advanced (locked)'}});
+ document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.s===S.sec)});
+ var p=S.lvl==='normal'?Math.min(S.n,10)/10:S.lvl==='hard'?Math.min(S.h,10)/10:1;$('pg').style.width=p*100+'%';
+ $('pl').textContent=S.lvl==='normal'?'Normal: '+Math.min(S.n,10)+'/10 poore (phir 50 coins + Hard)':S.lvl==='hard'?'Hard: '+Math.min(S.h,10)+'/10 poore (phir Advanced khulega)':'Advanced: anant sawal';
+}
+function load(){
+ cur=nextQ(S.lvl);done=false;asked.push(cur[0]);if(asked.length>20)asked.shift();$('q').textContent=cur[0];
+ var o=$('opts');o.textContent='';
+ cur[1].forEach(function(t,i){var b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=function(){ans(i)};o.appendChild(b)});
+ $('ex').style.display='none';$('nx').style.display='none';render();
+}
+function ans(i){
+ if(done)return;done=true;var ok=i===cur[2],bs=$('opts').children;
+ for(var k=0;k<bs.length;k++){bs[k].disabled=true;if(k===cur[2])bs[k].classList.add('ok')}
+ if(!ok)bs[i].classList.add('no');
+ $('ev').textContent=ok?'Sahi jawab!':'Sahi jawab: '+cur[1][cur[2]];$('es').textContent=cur[3];$('esl').innerHTML='';
+ cur[4].split('\n').forEach(function(l){var d=document.createElement('div');d.textContent=l;$('esl').appendChild(d)});
+ $('esr').textContent='— '+cur[5]+(cur[6]?' · AI ne banaya, shlok jaanch lo':'');$('ex').style.display='block';$('nx').style.display='inline-flex';
+ S.tot++;if(ok){S.ok++;S.stk++;S.ms[mk]=(S.ms[mk]||0)+PT[S.lvl]}else S.stk=0;
+ if(S.lvl==='normal'){S.n++;if(S.n===N.normal){S.coins+=50;toast('Badhai! 10 sawal poore: +50 coins aur Hard level khul gaya!')}}
+ else if(S.lvl==='hard'){S.h++;if(S.h===N.hard)toast('Shabash! Advanced level khul gaya!')}
+ save();render();pushScore();
+}
+$('nx').onclick=load;
+document.querySelectorAll('.tab[data-l]').forEach(function(b){b.onclick=function(){if(b.disabled)return;S.lvl=b.dataset.l;save();load()}});
+(function(){var d=new Date(),e=new Date(d.getFullYear(),d.getMonth()+1,0);$('dl').textContent=e.getDate()-d.getDate()})();
+/* 3D tilt */
+function tilt(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateY('+x*12+'deg) rotateX('+-y*12+'deg) translateZ(10px)'});c.addEventListener('mouseleave',function(){c.style.transform=''})}
+document.querySelectorAll('.tilt').forEach(tilt);
+var c3=$('c3d');addEventListener('pointermove',function(e){c3.style.setProperty('--mx',(e.clientX/innerWidth-.5).toFixed(3));c3.style.setProperty('--my',(e.clientY/innerHeight-.5).toFixed(3))});
+var pbusy=false;
+async function pushScore(){if(!dbn||!uid||!cw||pbusy)return;pbusy=true;try{await dbn.collection('scores').doc(uid).set({m:mk,pts:S.ms[mk]||0})}catch(e){}pbusy=false}
+async function nm(ids){try{var ps=await un.profiles(ids);return function(i){return(ps[i]&&ps[i].name)||'Sadhak'}}catch(e){return function(){return 'Sadhak'}}}
+async function renderLb(){
+ var l=$('lb');if(!l)return;l.textContent='';
+ var rows=SC.filter(function(x){return x.m===mk&&x.pts>0}).sort(function(a,b){return b.pts-a.pts}).slice(0,10),f=function(i){return 'Sadhak'};
+ if(!dbn||!rows.length){var li=document.createElement('li');li.className='me';li.textContent='Aap: '+(S.ms[mk]||0)+' ank';l.appendChild(li);return}
+ f=await nm(rows.map(function(r){return r.id}));l.textContent='';
+ rows.forEach(function(r){var li=document.createElement('li');if(r.id===uid)li.className='me';li.textContent=(r.id===uid?'Aap':f(r.id))+' - '+r.pts+' ank';l.appendChild(li)});
+}
+async function renderRv(){
+ var n=RV.length,avg=n?RV.reduce(function(a,r){return a+(r.stars||0)},0)/n:0;
+ $('rv-sum').textContent=n?'Ausat rating '+avg.toFixed(1)+' / 5 ('+n+' review)':'Abhi koi review nahi. Pehle aap likho.';
+ var L=$('rv-list');L.textContent='';
+ var rows=RV.slice().sort(function(a,b){return(b.ts||0)-(a.ts||0)}).slice(0,20);
+ if(!rows.length){L.textContent='Reviews yahan dikhenge.';return}
+ var f=await nm(rows.map(function(r){return r.id}));L.textContent='';
+ rows.forEach(function(r){var d=document.createElement('div');d.className='rv';var b=document.createElement('b');b.textContent='★'.repeat(r.stars||0);var sm=document.createElement('small');sm.textContent=' '+(r.id===uid?'Aap':f(r.id));var p=document.createElement('div');p.textContent=r.text||'';d.appendChild(b);d.appendChild(sm);d.appendChild(p);L.appendChild(d)});
+}
+(function(){var st=$('stars');for(var i=1;i<=5;i++)(function(i){var b=document.createElement('button');b.className='st';b.textContent='★';b.setAttribute('aria-label',i+' star');b.onclick=function(){stars=i;[].forEach.call(st.children,function(c,k){c.classList.toggle('on',k<i)})};st.appendChild(b)})(i)})();
+$('rv-go').onclick=async function(){
+ if(!dbn||!uid||!cw){toast('Review ke liye claude.ai me sign-in karke page kholo.');return}
+ if(!stars){toast('Pehle star chuno.');return}
+ try{await dbn.collection('reviews').doc(uid).set({stars:stars,text:$('rv-t').value.trim().slice(0,300),ts:Date.now()});toast('Dhanyavad! Review save ho gaya.')}catch(e){toast('Review save nahi ho paya.')}
+};
+(async function(){
+ try{
+  var u=window.claude&&await claude.use('user'),d=window.claude&&await claude.use('db');
+  if(!u||!d){$('shared-note').style.display='block';return}
+  dbn=d;un=u;uid=await u.id();var c=await u.can('data.write');cw=!!uid&&c!==false;
+  if(!uid){$('shared-note').style.display='block'}
+  d.collection('reviews').limit(100).onSnapshot(function(sn){RV=sn.docs.map(function(x){return Object.assign({id:x.id},x.data())});renderRv()},function(){});
+  d.collection('scores').limit(200).onSnapshot(function(sn){SC=sn.docs.map(function(x){return Object.assign({id:x.id},x.data())});renderLb()},function(){});
+  pushScore();
+ }catch(e){$('shared-note').style.display='block'}
+})();
+
+/* 3D background */
+(function(){try{
+ var cv=$('bg'),R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true}),sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(50,1,.1,100);
+ R.setPixelRatio(Math.min(devicePixelRatio,2));cam.position.set(0,0,9);
+ sc.add(new THREE.AmbientLight(0x9a80c0,.9));var p1=new THREE.PointLight(0xffd27a,1.6,60);p1.position.set(4,4,6);sc.add(p1);
+ var g=new THREE.Group();g.position.set(3.2,0,-6);sc.add(g);
+ var tm=new THREE.MeshBasicMaterial({transparent:true,opacity:.55,depthWrite:false}),pl=new THREE.Mesh(new THREE.PlaneGeometry(9,9),tm);g.add(pl);
+ function om(){var c=document.createElement('canvas');c.width=c.height=512;var x=c.getContext('2d');x.font='400px "Tiro Devanagari Hindi",serif';x.textAlign='center';x.textBaseline='middle';var f=x.createLinearGradient(0,100,0,420);f.addColorStop(0,'#FFE29A');f.addColorStop(1,'#FF8A1F');x.fillStyle=f;x.globalAlpha=.45;x.fillText('ॐ',256,280);tm.map=new THREE.CanvasTexture(c);tm.needsUpdate=true}
+ if(document.fonts&&document.fonts.load)document.fonts.load('300px "Tiro Devanagari Hindi"','ॐ').then(om,om);else om();
+ var rm=new THREE.MeshBasicMaterial({color:0xE5A93A,transparent:true,opacity:.35}),rings=[];
+ [4,5.4,6.8].forEach(function(r,i){var t=new THREE.Mesh(new THREE.TorusGeometry(r,.02,12,160),rm);t.rotation.x=i*.5;g.add(t);rings.push(t)});
+ var orb=new THREE.Group();g.add(orb);
+ [0xFF3B44,0xFF8A1F,0xFFD92E,0x2FD16A,0x2FA8FF,0x5A5AFF,0xB06BFF].forEach(function(c,i){var a=i/7*Math.PI*2,s=new THREE.Mesh(new THREE.SphereGeometry(.22,24,24),new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:.5,roughness:.3}));s.position.set(Math.cos(a)*5.4,Math.sin(a)*5.4,0);orb.add(s)});
+ var pos=new Float32Array(1500);for(var i=0;i<1500;i++)pos[i]=(Math.random()-.5)*40;var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));var pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xFFD27A,size:.05,transparent:true,opacity:.8}));sc.add(pts);
+ var mx=0,my=0;addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+ function size(){R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();g.position.x=innerWidth>820?3.2:0}
+ size();addEventListener('resize',size);var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ (function loop(){requestAnimationFrame(loop);
+  cam.position.x+=(camT[0]+mx*1.2-cam.position.x)*.04;cam.position.y+=(camT[1]-my*.8-cam.position.y)*.04;cam.position.z+=(camT[2]-cam.position.z)*.04;cam.rotation.y+=(camT[3]-cam.rotation.y)*.04;
+  if(!calm){orb.rotation.z-=.004;rings[0].rotation.z+=.003;rings[1].rotation.y+=.003;rings[2].rotation.x+=.002;pl.rotation.y=Math.sin(Date.now()/3000)*.35;pts.rotation.y+=.0005}
+  R.render(sc,cam)})();
+}catch(e){}})();
+ui();go('home');updAI();
+</script>
+</body>
+</html>
